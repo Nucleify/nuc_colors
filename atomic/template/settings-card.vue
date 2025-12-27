@@ -1,18 +1,34 @@
 <template>
   <nuc-settings-card
-    heading="Colors"
+    :heading="props.heading || 'Settings'"
     :show-button="true"
     :onButtonClick="resetColorsToDefault"
+    class="settings-card"
   >
-    <ul class="settings-card-item-list">
-      <li v-for="item in colorList" :key="item" class="settings-card-item">
-        <ad-label :label="item" :for="item" />
-        <nuc-color-picker :ad-type="item.toLowerCase()" />
-      </li>
-    </ul>
+    <div
+      v-for="group in colorGroups"
+      :key="group.module"
+      class="settings-card-group"
+    >
+      <h4 class="settings-card-group-title">{{ group.module }}</h4>
+      <ul class="settings-card-item-list">
+        <li
+          v-for="item in group.items"
+          :key="item"
+          class="settings-card-item"
+        >
+          <ad-label :label="item" :for="item" />
+          <nuc-color-picker :ad-type="item.toLowerCase()" />
+        </li>
+      </ul>
+    </div>
   </nuc-settings-card>
 </template>
 
 <script setup lang="ts">
-import { colorList, resetColorsToDefault } from 'atomic'
+import { colorGroups, resetColorsToDefault } from 'atomic'
+
+const props = defineProps<{
+  heading: string
+}>()
 </script>
