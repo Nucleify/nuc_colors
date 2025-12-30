@@ -3,17 +3,18 @@
 @each $type in $ad-types {
   .p-inputtext[ad-type='#{$type}'] {
     @include entity-inputtext-styles(
-      var(--#{$type}-item-color-new) !important,
-      var(--#{$type}-item-focus-color-new) !important
+      var(--#{$type}-item-color-user) !important,
+      var(--#{$type}-item-focus-color-user) !important
     );
   }
 
+  body:has(#home),
   body:has(#login),
   body:has(#register) {
     .p-inputtext[ad-type='#{$type}'] {
       @include entity-inputtext-styles(
-        $primary-color !important,
-        $primary-focus-color !important
+        var(--#{$type}-item-color-system) !important,
+        var(--#{$type}-item-focus-color-system) !important
       );
     }
   }

@@ -3,8 +3,8 @@
 @each $type in $ad-types {
   .ad-tile[ad-type='#{$type}'] {
     @include entity-tile-styles(
-      var(--#{$type}-item-color-new) !important,
-      var(--#{$type}-item-highlight-color-new) !important
+      var(--#{$type}-item-color-user) !important,
+      var(--#{$type}-item-highlight-color-user) !important
     );
   }
 }

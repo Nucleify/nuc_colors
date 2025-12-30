@@ -1,32 +1,52 @@
 import { defineNuxtPlugin } from 'nuxt/app'
 
 import {
-  applyColorsWithNewSuffix,
+  applyColorsWithSystemAndUser,
   colorKeys,
   colorShades,
   cookieGetItem,
   cookieSetItem,
   localStorageGetItem,
+  localStorageSetItem,
 } from 'atomic'
 
 export default defineNuxtPlugin(() => {
   if (import.meta.client) {
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', applyColorsWithNewSuffix, {
-        once: true,
-      })
+      document.addEventListener(
+        'DOMContentLoaded',
+        applyColorsWithSystemAndUser,
+        {
+          once: true,
+        }
+      )
     } else {
-      applyColorsWithNewSuffix()
+      applyColorsWithSystemAndUser()
     }
 
     colorKeys.forEach((item: string): void =>
       colorShades.forEach((state: string): void => {
-        const key = `${item}-item-${state}`
-        const localStorageValue = localStorageGetItem(key)
-        const cookieValue = cookieGetItem(key)
+        const baseKey = `${item}-item-${state}`
+        const systemKey = `${baseKey}-system`
+        const userKey = `${baseKey}-user`
 
-        if (localStorageValue && !cookieValue) {
-          cookieSetItem(key, localStorageValue)
+        const systemLocalStorageValue = localStorageGetItem(systemKey)
+        const systemCookieValue = cookieGetItem(systemKey)
+        if (systemLocalStorageValue && !systemCookieValue) {
+          cookieSetItem(systemKey, systemLocalStorageValue)
+        }
+
+        const userLocalStorageValue = localStorageGetItem(userKey)
+        const userCookieValue = cookieGetItem(userKey)
+
+        if (userLocalStorageValue && !userCookieValue) {
+          cookieSetItem(userKey, userLocalStorageValue)
+        } else if (!userLocalStorageValue && !userCookieValue) {
+          const systemValue = systemLocalStorageValue || systemCookieValue
+          if (systemValue) {
+            cookieSetItem(userKey, systemValue)
+            localStorageSetItem(userKey, systemValue)
+          }
         }
       })
     )

@@ -1,12 +1,14 @@
 import { cookieSetItem, localStorageSetItem } from 'atomic'
 
 export function setColorWithNewSuffix(key: string, value: string): void {
-  const newKey = `${key}-new`
+  const userKey = `${key}-user`
 
-  cookieSetItem(newKey, value)
-  localStorageSetItem(newKey, value)
+  cookieSetItem(userKey, value)
+  localStorageSetItem(userKey, value)
 
   if (import.meta.client) {
-    document.documentElement.style.setProperty(`--${newKey}`, value)
+    document.documentElement.style.setProperty(`--${key}`, value)
+    const event = new Event('colorUpdated')
+    document.dispatchEvent(event)
   }
 }

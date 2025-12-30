@@ -11,7 +11,8 @@ vi.mock('atomic', () => ({
   cookieGetItem: vi.fn().mockReturnValue(undefined),
   localStorageGetItem: vi.fn().mockReturnValue('localValue'),
   cookieSetItem: vi.fn(),
-  applyColorsWithNewSuffix: vi.fn(),
+  localStorageSetItem: vi.fn(),
+  applyColorsWithSystemAndUser: vi.fn(),
 }))
 
 describe('colors.client plugin', (): void => {
@@ -28,19 +29,23 @@ describe('colors.client plugin', (): void => {
     delete globalThis.__TEST_CLIENT__
   })
 
-  it('calls applyColorsWithNewSuffix and syncs localStorage/cookies', (): void => {
+  it('calls applyColorsWithSystemAndUser and syncs localStorage/cookies', (): void => {
     const addEventListenerSpy = vi.spyOn(document, 'addEventListener')
 
     colorsClientPlugin({} as NuxtApp)
 
     expect(addEventListenerSpy).toHaveBeenCalledWith(
       'DOMContentLoaded',
-      atomic.applyColorsWithNewSuffix,
+      atomic.applyColorsWithSystemAndUser,
       { once: true }
     )
-    expect(atomic.applyColorsWithNewSuffix).not.toHaveBeenCalled()
+    expect(atomic.applyColorsWithSystemAndUser).not.toHaveBeenCalled()
     expect(atomic.cookieSetItem).toHaveBeenCalledWith(
-      'foo-item-bar',
+      'foo-item-bar-system',
+      'localValue'
+    )
+    expect(atomic.cookieSetItem).toHaveBeenCalledWith(
+      'foo-item-bar-user',
       'localValue'
     )
   })

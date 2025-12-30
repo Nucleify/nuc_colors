@@ -1,8 +1,10 @@
 import {
   colorKeys,
   colorShades,
+  cookieGetItem,
   cookieSetItem,
   defaultColors,
+  localStorageGetItem,
   localStorageSetItem,
 } from 'atomic'
 
@@ -12,19 +14,20 @@ export function resetColorsToDefault(): void {
     colorKeys.forEach((item: string): void =>
       colorShades.forEach((state: string): void => {
         const key = `${item}-item-${state}`
-        const newKey = `${key}-new`
-        const defaultValue = defaultColors[key]
+        const systemKey = `${key}-system`
+        const userKey = `${key}-user`
+        const systemValue =
+          cookieGetItem(systemKey) ||
+          localStorageGetItem(systemKey) ||
+          defaultColors[key]
 
-        if (defaultValue) {
-          cookieSetItem(newKey, defaultValue)
-          localStorageSetItem(newKey, defaultValue)
+        if (systemValue) {
+          cookieSetItem(userKey, systemValue)
+          localStorageSetItem(userKey, systemValue)
 
-          document.documentElement.style.setProperty(
-            `--${newKey}`,
-            defaultValue
-          )
+          document.documentElement.style.setProperty(`--${key}`, systemValue)
 
-          console.log(`✅ Reset: ${newKey} = ${defaultValue}`)
+          console.log(`✅ Reset: ${userKey} = ${systemValue}`)
         }
       })
     )

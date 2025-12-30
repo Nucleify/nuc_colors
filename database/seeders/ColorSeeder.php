@@ -10,7 +10,6 @@ class ColorSeeder extends Seeder
     {
         $this->call([
             SystemColorSeeder::class,
-            UserColorSeeder::class,
         ]);
     }
 }

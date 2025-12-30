@@ -3,7 +3,7 @@
 @each $type in $ad-types {
   .p-radiobutton[ad-type='#{$type}'] {
     @include entity-radiobutton-styles(
-      var(--#{$type}-item-color-new) !important
+      var(--#{$type}-item-color-user) !important
     );
   }
 
@@ -16,7 +16,7 @@
     input[type='radio'] {
     @include entity-dock-radiobutton-styles(
       #ffffff15,
-      var(--#{$type}-item-color-new) !important
+      var(--#{$type}-item-color-user) !important
     );
   }
 }

@@ -12,19 +12,41 @@ export default defineNuxtPlugin(() => {
 
       colorKeys.forEach((item: string) => {
         colorShades.forEach((state: string) => {
-          const key = `${item}-item-${state}`
-          const newKey = `${key}-new`
+          const baseKey = `${item}-item-${state}`
+          const systemKey = `${baseKey}-system`
+          const systemCookieMatch = cookies.match(
+            new RegExp(`${systemKey}=([^;]+)`)
+          )
 
-          const newCookieMatch = cookies.match(new RegExp(`${newKey}=([^;]+)`))
-          if (newCookieMatch) {
-            const value = decodeURIComponent(newCookieMatch[1])
-            colorVariables.push(`--${newKey}: ${value};`)
-          } else {
-            const cookieMatch = cookies.match(new RegExp(`${key}=([^;]+)`))
-            if (cookieMatch) {
-              const value = decodeURIComponent(cookieMatch[1])
-              colorVariables.push(`--${key}: ${value};`)
-            }
+          if (systemCookieMatch) {
+            const value = decodeURIComponent(systemCookieMatch[1])
+            colorVariables.push(`--${systemKey}: ${value};`)
+            colorVariables.push(`--${baseKey}: ${value};`)
+          }
+        })
+      })
+
+      colorKeys.forEach((item: string) => {
+        colorShades.forEach((state: string) => {
+          const baseKey = `${item}-item-${state}`
+          const systemKey = `${baseKey}-system`
+          const userKey = `${baseKey}-user`
+          const userCookieMatch = cookies.match(
+            new RegExp(`${userKey}=([^;]+)`)
+          )
+          const systemCookieMatch = cookies.match(
+            new RegExp(`${systemKey}=([^;]+)`)
+          )
+
+          const userValue = userCookieMatch
+            ? decodeURIComponent(userCookieMatch[1])
+            : systemCookieMatch
+              ? decodeURIComponent(systemCookieMatch[1])
+              : null
+
+          if (userValue) {
+            colorVariables.push(`--${userKey}: ${userValue};`)
+            colorVariables.push(`--${baseKey}: ${userValue};`)
           }
         })
       })

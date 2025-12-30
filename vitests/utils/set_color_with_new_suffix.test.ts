@@ -4,23 +4,23 @@ import * as atomic from 'atomic'
 import { setColorWithNewSuffix } from 'atomic'
 
 describe('setColorWithNewSuffix', (): void => {
-  it('should set cookie, localStorage, and CSS variable with new suffix', (): void => {
+  it('should set cookie, localStorage, and CSS variable with user suffix', (): void => {
     const key = 'task-item-color'
     const value = '#ff0000'
-    const newKey = `${key}-new`
+    const userKey = `${key}-user`
 
-    atomic.cookieSetItem(newKey, '')
-    atomic.localStorageSetItem(newKey, '')
-    document.documentElement.style.removeProperty(`--${newKey}`)
+    atomic.cookieSetItem(userKey, '')
+    atomic.localStorageSetItem(userKey, '')
+    document.documentElement.style.removeProperty(`--${key}`)
 
     setColorWithNewSuffix(key, value)
 
-    expect(document.cookie.includes(`${newKey}=${value}`)).toBe(true)
+    expect(document.cookie.includes(`${userKey}=${value}`)).toBe(true)
 
-    expect(localStorage.getItem(newKey)).toBe(value)
+    expect(localStorage.getItem(userKey)).toBe(value)
 
     const cssValue = getComputedStyle(document.documentElement)
-      .getPropertyValue(`--${newKey}`)
+      .getPropertyValue(`--${key}`)
       .trim()
 
     expect(cssValue).toBe(value)

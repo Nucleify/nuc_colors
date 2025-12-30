@@ -3,16 +3,16 @@
 @each $type in $ad-types {
   .ad-select[ad-type='#{$type}'] {
     @include entity-select-styles(
-      var(--#{$type}-item-color-new) !important,
-      var(--#{$type}-item-focus-color-new) !important
+      var(--#{$type}-item-color-user) !important,
+      var(--#{$type}-item-focus-color-user) !important
     );
   }
 
   .ad-select-overlay[ad-type='#{$type}'] {
     @include entity-select-overlay-styles(
-      var(--#{$type}-item-color-new) !important,
-      var(--#{$type}-item-selected-color-new) !important,
-      var(--#{$type}-item-highlight-color-new) !important
+      var(--#{$type}-item-color-user) !important,
+      var(--#{$type}-item-selected-color-user) !important,
+      var(--#{$type}-item-highlight-color-user) !important
     );
   }
 }

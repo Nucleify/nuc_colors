@@ -17,16 +17,16 @@ describe('useColors', (): void => {
       expect(itemColors).toHaveProperty('secondary')
 
       expect(itemColors.primary).toBe(
-        atomic.getColorValue(`${key}-item-color-new`) ||
-          atomic.getColorValue(`${key}-item-color`)
+        atomic.getColorValue(`${key}-item-color-user`) ||
+          atomic.getColorValue(`${key}-item-color-system`)
       )
       expect(itemColors.hover).toBe(
-        atomic.getColorValue(`${key}-item-hover-color-new`) ||
-          atomic.getColorValue(`${key}-item-hover-color`)
+        atomic.getColorValue(`${key}-item-hover-color-user`) ||
+          atomic.getColorValue(`${key}-item-hover-color-system`)
       )
       expect(itemColors.secondary).toBe(
-        atomic.getColorValue(`${key}-item-secondary-color-new`) ||
-          atomic.getColorValue(`${key}-item-secondary-color`)
+        atomic.getColorValue(`${key}-item-secondary-color-user`) ||
+          atomic.getColorValue(`${key}-item-secondary-color-system`)
       )
     })
   })

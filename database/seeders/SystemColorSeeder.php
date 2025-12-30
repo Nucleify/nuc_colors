@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 
 class SystemColorSeeder extends Seeder
 {
-    protected string $path = 'modules/nuc_colors/database/constants/';
+    protected string $path = __DIR__ . '/../constants/';
 
     /**
      * Run the database seeds.
@@ -17,7 +17,16 @@ class SystemColorSeeder extends Seeder
         $colors = include $this->path . 'Colors.php';
 
         foreach ($colors as $color) {
-            SystemColor::factory()->create($color);
+            $name = $color['name'];
+            $name = preg_replace('/-new$/', '', $name);
+            $name = str_replace('--', '--', $name);
+            $name = $name . '-system';
+
+            SystemColor::factory()->create([
+                'name' => $name,
+                'value' => $color['value'],
+                'new' => false,
+            ]);
         }
     }
 }

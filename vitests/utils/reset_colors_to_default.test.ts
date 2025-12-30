@@ -19,14 +19,10 @@ describe('resetColorsToDefault', (): void => {
     atomic.colorKeys.forEach((item) => {
       atomic.colorShades.forEach((state) => {
         const key = `${item}-item-${state}`
-        const newKey = `${key}-new`
         const defaultValue = atomic.defaultColors[key]
 
         if (defaultValue) {
-          expect(setPropertySpy).toHaveBeenCalledWith(
-            `--${newKey}`,
-            defaultValue
-          )
+          expect(setPropertySpy).toHaveBeenCalledWith(`--${key}`, defaultValue)
         }
       })
     })
