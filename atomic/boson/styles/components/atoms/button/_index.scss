@@ -2,10 +2,12 @@
 
 @each $type in $ad-types {
   .p-button[ad-type='#{$type}'] {
-    @include entity-button-styles(
-      var(--#{$type}-item-color-user) !important,
-      var(--#{$type}-item-focus-color-user) !important,
-      var(--#{$type}-item-selected-color-user) !important
-    );
+    @include entity-with-suffix($type) using ($suffix) {
+      @include entity-button-styles(
+        var(--#{$type}-item-color#{$suffix}) !important,
+        var(--#{$type}-item-focus-color#{$suffix}) !important,
+        var(--#{$type}-item-selected-color#{$suffix}) !important
+      );
+    }
   }
 }

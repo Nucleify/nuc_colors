@@ -2,19 +2,10 @@
 
 @each $type in $ad-types {
   .ad-logo[ad-type='#{$type}'] {
-    @include entity-logo-styles(
-      var(--#{$type}-item-color-user) !important,
-      var(--#{$type}-item-dark-color-user) !important,
-    );
-  }
-
-  body:has(#home),
-  body:has(#login),
-  body:has(#register) {
-    .ad-logo[ad-type='#{$type}'] {
+    @include entity-with-suffix($type) using ($suffix) {
       @include entity-logo-styles(
-        var(--#{$type}-item-color-system) !important,
-        var(--#{$type}-item-dark-color-system) !important
+        var(--#{$type}-item-color#{$suffix}) !important,
+        var(--#{$type}-item-dark-color#{$suffix}) !important
       );
     }
   }

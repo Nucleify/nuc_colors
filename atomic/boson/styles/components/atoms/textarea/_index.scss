@@ -2,9 +2,11 @@
 
 @each $type in $ad-types {
   .p-textarea[ad-type='#{$type}'] {
-    @include entity-textarea-styles(
-      var(--#{$type}-item-color-user) !important,
-      var(--#{$type}-item-focus-color-user) !important
-    );
+    @include entity-with-suffix($type) using ($suffix) {
+      @include entity-textarea-styles(
+        var(--#{$type}-item-color#{$suffix}) !important,
+        var(--#{$type}-item-focus-color#{$suffix}) !important
+      );
+    }
   }
 }

@@ -1,37 +1,24 @@
-@use 'sass:map';
 @import 'mixins';
 
-$items: (
-  activity-log: (
-    color: --activity-item-color-user,
-  ),
-  admin: (
-    color: --main-item-color-user,
-  ),
-  dashboard: (
-    color: --main-item-color-user,
-  ),
-  entities: (
-    color: --main-item-color-user,
-  ),
-  files: (
-    color: --file-item-color-user,
-  ),
-  settings: (
-    color: --main-item-color-user,
-  ),
-  structural: (
-    color: --main-item-color-user,
-  ),
-  tasks: (
-    color: --task-item-color-user,
-  ),
+$dock-items: (
+  activity-log: activity,
+  admin: main,
+  dashboard: main,
+  entities: main,
+  files: file,
+  settings: main,
+  structural: main,
+  tasks: task,
 );
 
-@each $item, $props in $items {
+@each $item, $type in $dock-items {
   #__nuxt:has(##{$item}) {
     .p-dock .iconify[ad-type='#{$item}'] {
-      @include entity-dock-item-styles(var(map.get($props, color)) !important);
+      @include entity-with-suffix($type) using ($suffix) {
+        @include entity-dock-item-styles(
+          var(--#{$type}-item-color#{$suffix}) !important
+        );
+      }
     }
   }
 }

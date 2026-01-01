@@ -3,20 +3,10 @@
 @each $type in $ad-types {
   .p-password[ad-type='#{$type}'] {
     .p-inputtext {
-      @include entity-password-styles(
-        var(--#{$type}-item-color-user) !important,
-        var(--#{$type}-item-focus-color-user) !important
-      );
-    }
-  }
-
-  body:has(#login),
-  body:has(#register) {
-    .p-password[ad-type='#{$type}'] {
-      .p-inputtext {
+      @include entity-with-suffix($type) using ($suffix) {
         @include entity-password-styles(
-          var(--#{$type}-item-color-system) !important,
-          var(--#{$type}-item-focus-color-system) !important
+          var(--#{$type}-item-color#{$suffix}) !important,
+          var(--#{$type}-item-focus-color#{$suffix}) !important
         );
       }
     }

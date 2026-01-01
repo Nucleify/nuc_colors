@@ -2,18 +2,22 @@
 
 @each $type in $ad-types {
   .p-datepicker[ad-type='#{$type}'] {
-    @include entity-calendar-styles(
-      var(--#{$type}-item-color-user) !important,
-      var(--#{$type}-item-focus-color-user) !important
-    );
+    @include entity-with-suffix($type) using ($suffix) {
+      @include entity-calendar-styles(
+        var(--#{$type}-item-color#{$suffix}) !important,
+        var(--#{$type}-item-focus-color#{$suffix}) !important
+      );
+    }
   }
 
   .p-datepicker-panel.#{$type} {
-    @include entity-datepicker-styles(
-      var(--#{$type}-item-color-user) !important,
-      var(--#{$type}-item-focus-color-user) !important,
-      var(--#{$type}-item-selected-color-user) !important,
-      var(--#{$type}-item-highlight-color-user) !important
-    );
+    @include entity-with-suffix($type) using ($suffix) {
+      @include entity-datepicker-styles(
+        var(--#{$type}-item-color#{$suffix}) !important,
+        var(--#{$type}-item-focus-color#{$suffix}) !important,
+        var(--#{$type}-item-selected-color#{$suffix}) !important,
+        var(--#{$type}-item-highlight-color#{$suffix}) !important
+      );
+    }
   }
 }

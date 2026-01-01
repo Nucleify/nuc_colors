@@ -2,17 +2,21 @@
 
 @each $type in $ad-types {
   .ad-select[ad-type='#{$type}'] {
-    @include entity-select-styles(
-      var(--#{$type}-item-color-user) !important,
-      var(--#{$type}-item-focus-color-user) !important
-    );
+    @include entity-with-suffix($type) using ($suffix) {
+      @include entity-select-styles(
+        var(--#{$type}-item-color#{$suffix}) !important,
+        var(--#{$type}-item-focus-color#{$suffix}) !important
+      );
+    }
   }
 
   .ad-select-overlay[ad-type='#{$type}'] {
-    @include entity-select-overlay-styles(
-      var(--#{$type}-item-color-user) !important,
-      var(--#{$type}-item-selected-color-user) !important,
-      var(--#{$type}-item-highlight-color-user) !important
-    );
+    @include entity-with-suffix($type) using ($suffix) {
+      @include entity-select-overlay-styles(
+        var(--#{$type}-item-color#{$suffix}) !important,
+        var(--#{$type}-item-selected-color#{$suffix}) !important,
+        var(--#{$type}-item-highlight-color#{$suffix}) !important
+      );
+    }
   }
 }

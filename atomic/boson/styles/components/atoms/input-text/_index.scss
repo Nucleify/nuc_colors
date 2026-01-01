@@ -2,19 +2,10 @@
 
 @each $type in $ad-types {
   .p-inputtext[ad-type='#{$type}'] {
-    @include entity-inputtext-styles(
-      var(--#{$type}-item-color-user) !important,
-      var(--#{$type}-item-focus-color-user) !important
-    );
-  }
-
-  body:has(#home),
-  body:has(#login),
-  body:has(#register) {
-    .p-inputtext[ad-type='#{$type}'] {
+    @include entity-with-suffix($type) using ($suffix) {
       @include entity-inputtext-styles(
-        var(--#{$type}-item-color-system) !important,
-        var(--#{$type}-item-focus-color-system) !important
+        var(--#{$type}-item-color#{$suffix}) !important,
+        var(--#{$type}-item-focus-color#{$suffix}) !important
       );
     }
   }
