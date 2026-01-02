@@ -1,37 +1,18 @@
-export interface ColorGroup {
-  module: string
-  items: string[]
-}
+import type { SettingsGroupInterface } from 'atomic'
+import { modulesGroups } from 'atomic'
 
-export const colorGroups: ColorGroup[] = [
-  {
-    module: 'Main',
-    items: ['Main'],
-  },
-  {
-    module: 'nuc_activity',
-    items: ['Activity'],
-  },
-  {
-    module: 'nuc_entities',
-    items: ['Article', 'Contact', 'Feature', 'Money', 'Technology', 'User'],
-  },
-  {
-    module: 'nuc_entities_structural',
-    items: ['Card', 'Link', 'Question'],
-  },
-  {
-    module: 'nuc_documentation',
-    items: ['Documentation'],
-  },
-  {
-    module: 'nuc_files',
-    items: ['File'],
-  },
-  {
-    module: 'nuc_tasks',
-    items: ['Task'],
-  },
-] as const
+export const colorGroups: SettingsGroupInterface[] =
+  typeof window !== 'undefined'
+    ? [
+        {
+          name: 'Main',
+          items: ['Main'],
+        },
+        ...modulesGroups(),
+      ]
+    : []
 
-export const colorList: string[] = colorGroups.flatMap((group) => group.items)
+export const colorList: string[] =
+  typeof window !== 'undefined'
+    ? [...colorGroups.flatMap((group) => group.items as string[])]
+    : []
