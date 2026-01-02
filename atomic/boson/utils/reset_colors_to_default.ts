@@ -1,4 +1,5 @@
 import {
+  applyColorsWithSystemAndUser,
   colorKeys,
   colorShades,
   cookieGetItem,
@@ -25,12 +26,18 @@ export function resetColorsToDefault(): void {
           cookieSetItem(userKey, systemValue)
           localStorageSetItem(userKey, systemValue)
 
-          document.documentElement.style.setProperty(`--${key}`, systemValue)
-
           console.log(`✅ Reset: ${userKey} = ${systemValue}`)
         }
       })
     )
+
+    applyColorsWithSystemAndUser()
+
+    if (import.meta.client) {
+      const event = new Event('colorUpdated')
+      document.dispatchEvent(event)
+    }
+
     console.log('🎉 All colors reset to default values!')
   }
 }

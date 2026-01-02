@@ -1,5 +1,5 @@
 import type { Ref } from 'vue'
-import { ref } from 'vue'
+import { nextTick, onMounted, onUnmounted, ref } from 'vue'
 
 import type { UseColorPickerInterface, UseColorsInterface } from 'atomic'
 import {
@@ -13,6 +13,22 @@ export function useColorPicker(item: string): UseColorPickerInterface {
   const { colors }: UseColorsInterface = useColors()
 
   const itemColor: Ref<string> = ref(colors[item]?.primary || '#000000')
+
+  function updateItemColor(): void {
+    if (!import.meta.client) return
+
+    nextTick(() => {
+      const userKey = `--${item}-item-color-user`
+
+      const computedStyle = getComputedStyle(document.documentElement)
+      const newColor =
+        computedStyle.getPropertyValue(userKey).trim() || '#000000'
+
+      if (itemColor.value !== newColor) {
+        itemColor.value = newColor
+      }
+    })
+  }
 
   function setColorValues(): void {
     const colorValue = itemColor.value?.startsWith('#')
@@ -29,6 +45,16 @@ export function useColorPicker(item: string): UseColorPickerInterface {
     })
 
     applyColorsWithSystemAndUser()
+  }
+
+  if (import.meta.client) {
+    onMounted(() => {
+      document.addEventListener('colorUpdated', updateItemColor)
+    })
+
+    onUnmounted(() => {
+      document.removeEventListener('colorUpdated', updateItemColor)
+    })
   }
 
   return { itemColor, setColorValues }
