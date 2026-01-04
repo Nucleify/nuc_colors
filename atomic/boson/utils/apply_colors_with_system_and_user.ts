@@ -3,7 +3,6 @@ import {
   colorShades,
   cookieGetItem,
   defaultColors,
-  getColorValue,
   localStorageGetItem,
 } from 'atomic'
 

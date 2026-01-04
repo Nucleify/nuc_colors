@@ -5,7 +5,7 @@ import type { UseColorPickerInterface, UseColorsInterface } from 'atomic'
 import {
   applyColorsWithSystemAndUser,
   createColorShades,
-  setColorWithNewSuffix,
+  setColorWithUserSuffix,
   useColors,
 } from 'atomic'
 
@@ -41,7 +41,7 @@ export function useColorPicker(item: string): UseColorPickerInterface {
 
     Object.entries(colorSettings).forEach(([key, value]) => {
       const colorKey = `${item}-item${key ? `-${key}` : ''}-color`
-      setColorWithNewSuffix(colorKey, value)
+      setColorWithUserSuffix(colorKey, value)
     })
 
     applyColorsWithSystemAndUser()

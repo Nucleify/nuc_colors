@@ -1,6 +1,6 @@
 import { cookieSetItem, localStorageSetItem } from 'atomic'
 
-export function setColorWithNewSuffix(key: string, value: string): void {
+export function setColorWithUserSuffix(key: string, value: string): void {
   const userKey = `${key}-user`
 
   cookieSetItem(userKey, value)

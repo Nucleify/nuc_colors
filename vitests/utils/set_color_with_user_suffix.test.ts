@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest'
 
 import * as atomic from 'atomic'
-import { setColorWithNewSuffix } from 'atomic'
+import { setColorWithUserSuffix } from 'atomic'
 
-describe('setColorWithNewSuffix', (): void => {
+describe('setColorWithUserSuffix', (): void => {
   it('should set cookie, localStorage, and CSS variable with user suffix', (): void => {
     const key = 'task-item-color'
     const value = '#ff0000'
@@ -13,7 +13,7 @@ describe('setColorWithNewSuffix', (): void => {
     atomic.localStorageSetItem(userKey, '')
     document.documentElement.style.removeProperty(`--${key}`)
 
-    setColorWithNewSuffix(key, value)
+    setColorWithUserSuffix(key, value)
 
     expect(document.cookie.includes(`${userKey}=${value}`)).toBe(true)
 
