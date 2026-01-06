@@ -6,5 +6,5 @@ export interface NucColorPickerInterface extends ColorPickerInterface {}
 
 export interface UseColorPickerInterface {
   itemColor: Ref<string | undefined>
-  setColorValues: () => void
+  setColorValues: () => Promise<void>
 }

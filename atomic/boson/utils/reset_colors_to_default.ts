@@ -33,10 +33,8 @@ export function resetColorsToDefault(): void {
 
     applyColorsWithSystemAndUser()
 
-    if (import.meta.client) {
-      const event = new Event('colorUpdated')
-      document.dispatchEvent(event)
-    }
+    const event = new Event('colorUpdated')
+    document.dispatchEvent(event)
 
     console.log('🎉 All colors reset to default values!')
   }

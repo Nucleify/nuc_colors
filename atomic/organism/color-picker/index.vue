@@ -24,6 +24,8 @@
 </template>
 
 <script setup lang="ts">
+import { watch } from 'vue'
+
 import type { NucColorPickerInterface } from 'atomic'
 import { useColorPicker } from 'atomic'
 
@@ -31,7 +33,7 @@ const props = defineProps<NucColorPickerInterface>()
 
 const { itemColor, setColorValues } = useColorPicker(props.adType!)
 
-watchEffect(() => {
+watch(itemColor, () => {
   setColorValues()
 })
 </script>

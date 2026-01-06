@@ -108,4 +108,21 @@ class UserColorController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
+    public function updateAll(Request $request): JsonResponse
+    {
+        try {
+            $colors = $request->input('colors', []);
+            $result = $this->service->updateAll($request, $colors);
+
+            return response()->json([
+                'success' => true,
+                'updated_count' => $result['updated_count'],
+                'created_count' => $result['created_count'],
+                'message' => 'Successfully updated ' . $result['updated_count'] . ', created ' . $result['created_count'] . ' user colors',
+            ]);
+        } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
 }

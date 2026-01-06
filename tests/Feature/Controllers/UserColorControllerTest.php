@@ -42,7 +42,10 @@ describe('200', function (): void {
         $names = ['other', 'science', 'article'];
 
         foreach ($names as $name) {
-            UserColor::factory()->create(['name' => $name]);
+            UserColor::factory()->create([
+                'name' => $name,
+                'user_id' => $this->admin->id,
+            ]);
         }
 
         $response = $this->controller->getByName($name);
@@ -54,7 +57,7 @@ describe('200', function (): void {
             expect($model['name'])->toEqual($name);
         }
 
-        expect(count($data))->toEqual(UserColor::where('name', $name)->count());
+        expect(count($data))->toEqual(UserColor::where('name', $name)->where('user_id', $this->admin->id)->count());
     });
 
     test('show method', function (): void {

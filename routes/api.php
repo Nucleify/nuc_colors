@@ -36,6 +36,8 @@ Route::prefix('api')->middleware('web')->group(function (): void {
                 ->name('user-colors.countByCreatedLastWeek');
             Route::get('/get-by-name/{name}', 'getByName')
                 ->name('user-colors.getByName');
+            Route::put('/all', 'updateAll')
+                ->name('user-colors.updateAll');
             Route::get('/{id}', 'show')
                 ->name('user-colors.show');
             Route::post('/', 'store')

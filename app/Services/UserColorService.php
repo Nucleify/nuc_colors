@@ -35,7 +35,7 @@ class UserColorService
         $this->defineRequestData($request);
         $this->defineUserData();
 
-        $result = $this->model->all();
+        $result = $this->model->where('user_id', $this->causer->id)->get();
 
         $this->logger->logIndex($this->causer->name, $this->entity, true);
 
@@ -73,7 +73,8 @@ class UserColorService
     {
         $this->defineUserData();
 
-        $result = $this->model::getByName($name)->get();
+        $result = $this->model::getByName($name)
+            ->where('user_id', $this->causer->id)->get();
 
         $this->logger->logMessage($this->causer->name . ' fetched user colors by name: ' . $name . '.');
 
@@ -154,5 +155,62 @@ class UserColorService
         $model->delete();
 
         $this->logger->log($this->causer->name, $model->getName(), $this->entity, 'deleted');
+    }
+
+    /**
+     * Bulk update user colors
+     *
+     * @param Request $request
+     * @param array $colors Array of ['name' => string, 'value' => string]
+     *
+     * @return array
+     *
+     * @throws Exception
+     */
+    public function updateAll(Request $request, array $colors): array
+    {
+        $this->defineRequestData($request);
+        $this->defineUserData();
+
+        $updatedCount = 0;
+        $createdCount = 0;
+        $userId = $this->causer->id;
+
+        foreach ($colors as $colorData) {
+            if (!isset($colorData['name']) || !isset($colorData['value'])) {
+                continue;
+            }
+
+            $colorRecord = UserColor::where('user_id', $userId)
+                ->where('name', $colorData['name'])
+                ->first();
+
+            $isNew = $colorData['new'] ?? true;
+
+            if ($colorRecord) {
+                if ($colorRecord->getValue() !== $colorData['value']) {
+                    $colorRecord->update([
+                        'value' => $colorData['value'],
+                        'new' => $isNew,
+                    ]);
+                    $updatedCount++;
+                }
+            } else {
+                UserColor::create([
+                    'user_id' => $userId,
+                    'name' => $colorData['name'],
+                    'value' => $colorData['value'],
+                    'new' => $isNew,
+                ]);
+                $createdCount++;
+            }
+        }
+
+        $this->logger->logMessage($this->causer->name . ' bulk updated ' . $updatedCount . ', created ' . $createdCount . ' user colors.');
+
+        return [
+            'updated_count' => $updatedCount,
+            'created_count' => $createdCount,
+        ];
     }
 }

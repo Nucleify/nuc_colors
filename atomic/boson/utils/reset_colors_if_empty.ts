@@ -4,7 +4,7 @@ import {
   resetColorsToDefault,
 } from 'atomic'
 
-export function resetColorsIfEmpty() {
+export function resetColorsIfEmpty(): void {
   if (import.meta.client) {
     const shouldReset =
       localStorageGetItem('colors-initialized') === 'true' ? false : true
