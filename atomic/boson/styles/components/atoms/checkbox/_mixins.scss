@@ -1,0 +1,14 @@
+@mixin entity-checkbox-styles($item-color) {
+  &:hover {
+    .p-checkbox-box {
+      border-color: $item-color;
+    }
+  }
+}
+
+@mixin entity-checkbox-checked-styles($item-color) {
+  .p-checkbox-box {
+    background-color: $item-color;
+    border-color: $item-color;
+  }
+}
