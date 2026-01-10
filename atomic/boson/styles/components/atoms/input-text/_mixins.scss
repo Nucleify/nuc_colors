@@ -1,6 +1,6 @@
 @mixin entity-inputtext-styles($item-color, $box-shadow-color) {
   &:hover {
-    border-color: $item-color;
+    border-color: $box-shadow-color;
   }
 
   &:focus {
