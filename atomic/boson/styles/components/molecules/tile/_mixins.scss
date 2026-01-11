@@ -1,4 +1,9 @@
 @mixin entity-tile-styles($item-color, $selected-color) {
+  &:hover {
+    background: $selected-color;
+    border-color: $item-color;
+  }
+
   div:has(> .iconify) {
     background: $selected-color;
 
