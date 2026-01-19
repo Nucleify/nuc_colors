@@ -1,7 +1,7 @@
 @import 'mixins';
 
 @each $type in $ad-types {
-  .ad-select[ad-type='#{$type}'] {
+  .p-select[ad-type='#{$type}'] {
     @include entity-with-suffix($type) using ($suffix) {
       @include entity-select-styles(
         var(--#{$type}-item-color#{$suffix}) !important,
@@ -10,7 +10,7 @@
     }
   }
 
-  .ad-select-overlay[ad-type='#{$type}'] {
+  .p-select-overlay[ad-type='#{$type}'] {
     @include entity-with-suffix($type) using ($suffix) {
       @include entity-select-overlay-styles(
         var(--#{$type}-item-color#{$suffix}) !important,

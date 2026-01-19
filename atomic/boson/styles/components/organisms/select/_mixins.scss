@@ -16,7 +16,7 @@
   $selected-color,
   $highlight-color
 ) {
-  .ad-select-option {
+  .p-select-option {
     &:hover {
       background: $highlight-color;
     }
