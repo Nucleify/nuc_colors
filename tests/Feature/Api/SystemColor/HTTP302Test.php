@@ -13,18 +13,27 @@ beforeEach(function (): void {
 });
 
 describe('302', function (): void {
-    test('put > show api', function (): void {
-        $this->put(route('system-colors.show', 1))
-            ->assertStatus(302);
-    });
-
-    test('put > update api', function (): void {
-        $this->put(route('system-colors.update', 1))
-            ->assertStatus(302);
-    });
-
-    test('put > delete api', function (): void {
-        $this->put(route('system-colors.destroy', 1))
-            ->assertStatus(302);
-    });
+    apiTestArray([
+        'put > show api' => [
+            'method' => 'PUT',
+            'route' => 'system-colors.show',
+            'status' => 302,
+            'id' => 1,
+            'json' => false,
+        ],
+        'put > update api' => [
+            'method' => 'PUT',
+            'route' => 'system-colors.update',
+            'status' => 302,
+            'id' => 1,
+            'json' => false,
+        ],
+        'put > delete api' => [
+            'method' => 'PUT',
+            'route' => 'system-colors.destroy',
+            'status' => 302,
+            'id' => 1,
+            'json' => false,
+        ],
+    ]);
 });

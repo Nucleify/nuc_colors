@@ -14,175 +14,103 @@ beforeEach(function (): void {
     $this->actingAs($this->admin);
 });
 
-describe('422 > POST', function ($systemColorData = systemColorData) {
-    /**
-     * NAME TESTS
-     */
-    $systemColorData['name'] = '';
-    test('name > empty', apiTest(
-        'POST',
-        'system-colors.store',
-        422,
-        $systemColorData,
-        ['errors' => ['name']],
-        ['errors' => [
-            'name' => ['The name field is required.'],
-        ]]
-    ));
+describe('422 > POST', function (): void {
+    apiTestArray([
+        // NAME TESTS
+        'name > empty' => [
+            'method' => 'POST',
+            'route' => 'system-colors.store',
+            'data' => array_merge(systemColorData, ['name' => '']),
+            'structure' => ['errors' => ['name']],
+            'fragment' => ['errors' => ['name' => ['The name field is required.']]],
+        ],
+        'name > integer' => [
+            'method' => 'POST',
+            'route' => 'system-colors.store',
+            'data' => array_merge(systemColorData, ['name' => 1]),
+            'structure' => ['errors' => ['name']],
+            'fragment' => ['errors' => ['name' => ['The name field must be a string.']]],
+        ],
+        'name > false' => [
+            'method' => 'POST',
+            'route' => 'system-colors.store',
+            'data' => array_merge(systemColorData, ['name' => false]),
+            'structure' => ['errors' => ['name']],
+            'fragment' => ['errors' => ['name' => ['The name field must be a string.']]],
+        ],
+        'name > true' => [
+            'method' => 'POST',
+            'route' => 'system-colors.store',
+            'data' => array_merge(systemColorData, ['name' => true]),
+            'structure' => ['errors' => ['name']],
+            'fragment' => ['errors' => ['name' => ['The name field must be a string.']]],
+        ],
+        'name > empty array' => [
+            'method' => 'POST',
+            'route' => 'system-colors.store',
+            'data' => array_merge(systemColorData, ['name' => []]),
+            'structure' => ['errors' => ['name']],
+            'fragment' => ['errors' => ['name' => ['The name field is required.']]],
+        ],
 
-    $systemColorData['name'] = 1;
-    test('name > integer', apiTest(
-        'POST',
-        'system-colors.store',
-        422,
-        $systemColorData,
-        ['errors' => ['name']],
-        ['errors' => [
-            'name' => ['The name field must be a string.'],
-        ]]
-    ));
+        // VALUE TESTS
+        'value > empty' => [
+            'method' => 'POST',
+            'route' => 'system-colors.store',
+            'data' => array_merge(systemColorData, ['value' => '']),
+            'structure' => ['errors' => ['value']],
+            'fragment' => ['errors' => ['value' => ['The value field is required.']]],
+        ],
+        'value > integer' => [
+            'method' => 'POST',
+            'route' => 'system-colors.store',
+            'data' => array_merge(systemColorData, ['value' => 1]),
+            'structure' => ['errors' => ['value']],
+            'fragment' => ['errors' => ['value' => ['The value field must be a string.']]],
+        ],
+        'value > false' => [
+            'method' => 'POST',
+            'route' => 'system-colors.store',
+            'data' => array_merge(systemColorData, ['value' => false]),
+            'structure' => ['errors' => ['value']],
+            'fragment' => ['errors' => ['value' => ['The value field must be a string.']]],
+        ],
+        'value > true' => [
+            'method' => 'POST',
+            'route' => 'system-colors.store',
+            'data' => array_merge(systemColorData, ['value' => true]),
+            'structure' => ['errors' => ['value']],
+            'fragment' => ['errors' => ['value' => ['The value field must be a string.']]],
+        ],
+        'value > empty array' => [
+            'method' => 'POST',
+            'route' => 'system-colors.store',
+            'data' => array_merge(systemColorData, ['value' => []]),
+            'structure' => ['errors' => ['value']],
+            'fragment' => ['errors' => ['value' => ['The value field is required.']]],
+        ],
 
-    $systemColorData['name'] = false;
-    test('name > false', apiTest(
-        'POST',
-        'system-colors.store',
-        422,
-        $systemColorData,
-        ['errors' => ['name']],
-        ['errors' => [
-            'name' => ['The name field must be a string.'],
-        ]]
-    ));
-
-    $systemColorData['name'] = true;
-    test('name > true', apiTest(
-        'POST',
-        'system-colors.store',
-        422,
-        $systemColorData,
-        ['errors' => ['name']],
-        ['errors' => [
-            'name' => ['The name field must be a string.'],
-        ]]
-    ));
-
-    $systemColorData['name'] = [];
-    test('name > empty array', apiTest(
-        'POST',
-        'system-colors.store',
-        422,
-        $systemColorData,
-        ['errors' => ['name']],
-        ['errors' => [
-            'name' => ['The name field is required.'],
-        ]]
-    ));
-
-    $systemColorData['name'] = systemColorData['name'];
-
-    /**
-     * VALUE TESTS
-     */
-    $systemColorData['value'] = '';
-    test('value > empty', apiTest(
-        'POST',
-        'system-colors.store',
-        422,
-        $systemColorData,
-        ['errors' => ['value']],
-        ['errors' => [
-            'value' => ['The value field is required.'],
-        ]]
-    ));
-
-    $systemColorData['value'] = 1;
-    test('value > integer', apiTest(
-        'POST',
-        'system-colors.store',
-        422,
-        $systemColorData,
-        ['errors' => ['value']],
-        ['errors' => [
-            'value' => ['The value field must be a string.'],
-        ]]
-    ));
-
-    $systemColorData['value'] = false;
-    test('value > false', apiTest(
-        'POST',
-        'system-colors.store',
-        422,
-        $systemColorData,
-        ['errors' => ['value']],
-        ['errors' => [
-            'value' => ['The value field must be a string.'],
-        ]]
-    ));
-
-    $systemColorData['value'] = true;
-    test('value > true', apiTest(
-        'POST',
-        'system-colors.store',
-        422,
-        $systemColorData,
-        ['errors' => ['value']],
-        ['errors' => [
-            'value' => ['The value field must be a string.'],
-        ]]
-    ));
-
-    $systemColorData['value'] = [];
-    test('value > empty array', apiTest(
-        'POST',
-        'system-colors.store',
-        422,
-        $systemColorData,
-        ['errors' => ['value']],
-        ['errors' => [
-            'value' => ['The value field is required.'],
-        ]]
-    ));
-
-    $systemColorData['value'] = systemColorData['value'];
-
-    /**
-     * NEW TESTS
-     */
-    $systemColorData['new'] = '';
-    test('new > empty', apiTest(
-        'POST',
-        'system-colors.store',
-        422,
-        $systemColorData,
-        ['errors' => ['new']],
-        ['errors' => [
-            'new' => ['The new field is required.'],
-        ]]
-    ));
-
-    $systemColorData['new'] = 'not_a_boolean';
-    test('new > string', apiTest(
-        'POST',
-        'system-colors.store',
-        422,
-        $systemColorData,
-        ['errors' => ['new']],
-        ['errors' => [
-            'new' => ['The new field must be true or false.'],
-        ]]
-    ));
-
-    $systemColorData['new'] = [];
-    test('new > empty array', apiTest(
-        'POST',
-        'system-colors.store',
-        422,
-        $systemColorData,
-        ['errors' => ['new']],
-        ['errors' => [
-            'new' => ['The new field is required.'],
-        ]]
-    ));
-
-    $systemColorData['new'] = systemColorData['new'];
+        // NEW TESTS
+        'new > empty' => [
+            'method' => 'POST',
+            'route' => 'system-colors.store',
+            'data' => array_merge(systemColorData, ['new' => '']),
+            'structure' => ['errors' => ['new']],
+            'fragment' => ['errors' => ['new' => ['The new field is required.']]],
+        ],
+        'new > string' => [
+            'method' => 'POST',
+            'route' => 'system-colors.store',
+            'data' => array_merge(systemColorData, ['new' => 'not_a_boolean']),
+            'structure' => ['errors' => ['new']],
+            'fragment' => ['errors' => ['new' => ['The new field must be true or false.']]],
+        ],
+        'new > empty array' => [
+            'method' => 'POST',
+            'route' => 'system-colors.store',
+            'data' => array_merge(systemColorData, ['new' => []]),
+            'structure' => ['errors' => ['new']],
+            'fragment' => ['errors' => ['new' => ['The new field is required.']]],
+        ],
+    ]);
 });

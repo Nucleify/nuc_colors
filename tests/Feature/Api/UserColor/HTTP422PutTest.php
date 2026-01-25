@@ -14,227 +14,150 @@ beforeEach(function (): void {
     $this->actingAs($this->admin);
 });
 
-describe('422 > PUT', function ($updatedUserColorData = updatedUserColorData) {
-    /**
-     * USER ID TESTS
-     */
-    $updatedUserColorData['user_id'] = '';
-    test('user_id > empty', apiTest(
-        'PUT',
-        'user-colors.update',
-        422,
-        $updatedUserColorData,
-        ['errors' => ['user_id']],
-        ['errors' => [
-            'user_id' => ['The user id field must be an integer.'],
-        ]]
-    ));
+describe('422 > PUT', function (): void {
+    apiTestArray([
+        // USER ID TESTS
+        'user_id > empty' => [
+            'method' => 'PUT',
+            'route' => 'user-colors.update',
+            'id' => 1,
+            'data' => array_merge(updatedUserColorData, ['user_id' => '']),
+            'structure' => ['errors' => ['user_id']],
+            'fragment' => ['errors' => ['user_id' => ['The user id field must be an integer.']]],
+        ],
+        'user_id > string' => [
+            'method' => 'PUT',
+            'route' => 'user-colors.update',
+            'id' => 1,
+            'data' => array_merge(updatedUserColorData, ['user_id' => 'user_id']),
+            'structure' => ['errors' => ['user_id']],
+            'fragment' => ['errors' => ['user_id' => ['The user id field must be an integer.']]],
+        ],
+        'user_id > false' => [
+            'method' => 'PUT',
+            'route' => 'user-colors.update',
+            'id' => 1,
+            'data' => array_merge(updatedUserColorData, ['user_id' => false]),
+            'structure' => ['errors' => ['user_id']],
+            'fragment' => ['errors' => ['user_id' => ['The user id field must be an integer.']]],
+        ],
+        'user_id > empty array' => [
+            'method' => 'PUT',
+            'route' => 'user-colors.update',
+            'id' => 1,
+            'data' => array_merge(updatedUserColorData, ['user_id' => []]),
+            'structure' => ['errors' => ['user_id']],
+            'fragment' => ['errors' => ['user_id' => ['The user id field must be an integer.']]],
+        ],
 
-    $updatedUserColorData['user_id'] = 'user_id';
-    test('user_id > string', apiTest(
-        'PUT',
-        'user-colors.update',
-        422,
-        $updatedUserColorData,
-        ['errors' => ['user_id']],
-        ['errors' => [
-            'user_id' => ['The user id field must be an integer.'],
-        ]]
-    ));
+        // NAME TESTS
+        'name > empty' => [
+            'method' => 'PUT',
+            'route' => 'user-colors.update',
+            'id' => 1,
+            'data' => array_merge(updatedUserColorData, ['name' => '']),
+            'structure' => ['errors' => ['name']],
+            'fragment' => ['errors' => ['name' => ['The name field is required.']]],
+        ],
+        'name > integer' => [
+            'method' => 'PUT',
+            'route' => 'user-colors.update',
+            'id' => 1,
+            'data' => array_merge(updatedUserColorData, ['name' => 1]),
+            'structure' => ['errors' => ['name']],
+            'fragment' => ['errors' => ['name' => ['The name field must be a string.']]],
+        ],
+        'name > false' => [
+            'method' => 'PUT',
+            'route' => 'user-colors.update',
+            'id' => 1,
+            'data' => array_merge(updatedUserColorData, ['name' => false]),
+            'structure' => ['errors' => ['name']],
+            'fragment' => ['errors' => ['name' => ['The name field must be a string.']]],
+        ],
+        'name > true' => [
+            'method' => 'PUT',
+            'route' => 'user-colors.update',
+            'id' => 1,
+            'data' => array_merge(updatedUserColorData, ['name' => true]),
+            'structure' => ['errors' => ['name']],
+            'fragment' => ['errors' => ['name' => ['The name field must be a string.']]],
+        ],
+        'name > empty array' => [
+            'method' => 'PUT',
+            'route' => 'user-colors.update',
+            'id' => 1,
+            'data' => array_merge(updatedUserColorData, ['name' => []]),
+            'structure' => ['errors' => ['name']],
+            'fragment' => ['errors' => ['name' => ['The name field is required.']]],
+        ],
 
-    $updatedUserColorData['user_id'] = false;
-    test('user_id > false', apiTest(
-        'PUT',
-        'user-colors.update',
-        422,
-        $updatedUserColorData,
-        ['errors' => ['user_id']],
-        ['errors' => [
-            'user_id' => ['The user id field must be an integer.'],
-        ]]
-    ));
+        // VALUE TESTS
+        'value > empty' => [
+            'method' => 'PUT',
+            'route' => 'user-colors.update',
+            'id' => 1,
+            'data' => array_merge(updatedUserColorData, ['value' => '']),
+            'structure' => ['errors' => ['value']],
+            'fragment' => ['errors' => ['value' => ['The value field is required.']]],
+        ],
+        'value > integer' => [
+            'method' => 'PUT',
+            'route' => 'user-colors.update',
+            'id' => 1,
+            'data' => array_merge(updatedUserColorData, ['value' => 1]),
+            'structure' => ['errors' => ['value']],
+            'fragment' => ['errors' => ['value' => ['The value field must be a string.']]],
+        ],
+        'value > false' => [
+            'method' => 'PUT',
+            'route' => 'user-colors.update',
+            'id' => 1,
+            'data' => array_merge(updatedUserColorData, ['value' => false]),
+            'structure' => ['errors' => ['value']],
+            'fragment' => ['errors' => ['value' => ['The value field must be a string.']]],
+        ],
+        'value > true' => [
+            'method' => 'PUT',
+            'route' => 'user-colors.update',
+            'id' => 1,
+            'data' => array_merge(updatedUserColorData, ['value' => true]),
+            'structure' => ['errors' => ['value']],
+            'fragment' => ['errors' => ['value' => ['The value field must be a string.']]],
+        ],
+        'value > empty array' => [
+            'method' => 'PUT',
+            'route' => 'user-colors.update',
+            'id' => 1,
+            'data' => array_merge(updatedUserColorData, ['value' => []]),
+            'structure' => ['errors' => ['value']],
+            'fragment' => ['errors' => ['value' => ['The value field is required.']]],
+        ],
 
-    $updatedUserColorData['user_id'] = [];
-    test('user_id > empty array', apiTest(
-        'PUT',
-        'user-colors.update',
-        422,
-        $updatedUserColorData,
-        ['errors' => ['user_id']],
-        ['errors' => [
-            'user_id' => ['The user id field must be an integer.'],
-        ]]
-    ));
-
-    $updatedUserColorData['user_id'] = updatedUserColorData['user_id'];
-
-    /**
-     * NAME TESTS
-     */
-    $updatedUserColorData['name'] = '';
-    test('name > empty', apiTest(
-        'PUT',
-        'user-colors.update',
-        422,
-        $updatedUserColorData,
-        ['errors' => ['name']],
-        ['errors' => [
-            'name' => ['The name field is required.'],
-        ]]
-    ));
-
-    $updatedUserColorData['name'] = 1;
-    test('name > integer', apiTest(
-        'PUT',
-        'user-colors.update',
-        422,
-        $updatedUserColorData,
-        ['errors' => ['name']],
-        ['errors' => [
-            'name' => ['The name field must be a string.'],
-        ]]
-    ));
-
-    $updatedUserColorData['name'] = false;
-    test('name > false', apiTest(
-        'PUT',
-        'user-colors.update',
-        422,
-        $updatedUserColorData,
-        ['errors' => ['name']],
-        ['errors' => [
-            'name' => ['The name field must be a string.'],
-        ]]
-    ));
-
-    $updatedUserColorData['name'] = true;
-    test('name > true', apiTest(
-        'PUT',
-        'user-colors.update',
-        422,
-        $updatedUserColorData,
-        ['errors' => ['name']],
-        ['errors' => [
-            'name' => ['The name field must be a string.'],
-        ]]
-    ));
-
-    $updatedUserColorData['name'] = [];
-    test('name > empty array', apiTest(
-        'PUT',
-        'user-colors.update',
-        422,
-        $updatedUserColorData,
-        ['errors' => ['name']],
-        ['errors' => [
-            'name' => ['The name field is required.'],
-        ]]
-    ));
-
-    $updatedUserColorData['name'] = updatedUserColorData['name'];
-
-    /**
-     * VALUE TESTS
-     */
-    $updatedUserColorData['value'] = '';
-    test('value > empty', apiTest(
-        'PUT',
-        'user-colors.update',
-        422,
-        $updatedUserColorData,
-        ['errors' => ['value']],
-        ['errors' => [
-            'value' => ['The value field is required.'],
-        ]]
-    ));
-
-    $updatedUserColorData['value'] = 1;
-    test('value > integer', apiTest(
-        'PUT',
-        'user-colors.update',
-        422,
-        $updatedUserColorData,
-        ['errors' => ['value']],
-        ['errors' => [
-            'value' => ['The value field must be a string.'],
-        ]]
-    ));
-
-    $updatedUserColorData['value'] = false;
-    test('value > false', apiTest(
-        'PUT',
-        'user-colors.update',
-        422,
-        $updatedUserColorData,
-        ['errors' => ['value']],
-        ['errors' => [
-            'value' => ['The value field must be a string.'],
-        ]]
-    ));
-
-    $updatedUserColorData['value'] = true;
-    test('value > true', apiTest(
-        'PUT',
-        'user-colors.update',
-        422,
-        $updatedUserColorData,
-        ['errors' => ['value']],
-        ['errors' => [
-            'value' => ['The value field must be a string.'],
-        ]]
-    ));
-
-    $updatedUserColorData['value'] = [];
-    test('value > empty array', apiTest(
-        'PUT',
-        'user-colors.update',
-        422,
-        $updatedUserColorData,
-        ['errors' => ['value']],
-        ['errors' => [
-            'value' => ['The value field is required.'],
-        ]]
-    ));
-
-    $updatedUserColorData['value'] = updatedUserColorData['value'];
-
-    /**
-     * NEW TESTS
-     */
-    $updatedUserColorData['new'] = '';
-    test('new > empty', apiTest(
-        'PUT',
-        'user-colors.update',
-        422, $updatedUserColorData,
-        ['errors' => ['new']],
-        ['errors' => [
-            'new' => ['The new field is required.'],
-        ]]
-    ));
-
-    $updatedUserColorData['new'] = 'not_a_boolean';
-    test('new > string', apiTest(
-        'PUT',
-        'user-colors.update',
-        422,
-        $updatedUserColorData,
-        ['errors' => ['new']],
-        ['errors' => [
-            'new' => ['The new field must be true or false.'],
-        ]]
-    ));
-
-    $updatedUserColorData['new'] = [];
-    test('new > empty array', apiTest(
-        'PUT',
-        'user-colors.update',
-        422,
-        $updatedUserColorData,
-        ['errors' => ['new']],
-        ['errors' => [
-            'new' => ['The new field is required.'],
-        ]]
-    ));
-
-    $updatedUserColorData['new'] = updatedUserColorData['new'];
+        // NEW TESTS
+        'new > empty' => [
+            'method' => 'PUT',
+            'route' => 'user-colors.update',
+            'id' => 1,
+            'data' => array_merge(updatedUserColorData, ['new' => '']),
+            'structure' => ['errors' => ['new']],
+            'fragment' => ['errors' => ['new' => ['The new field is required.']]],
+        ],
+        'new > string' => [
+            'method' => 'PUT',
+            'route' => 'user-colors.update',
+            'id' => 1,
+            'data' => array_merge(updatedUserColorData, ['new' => 'not_a_boolean']),
+            'structure' => ['errors' => ['new']],
+            'fragment' => ['errors' => ['new' => ['The new field must be true or false.']]],
+        ],
+        'new > empty array' => [
+            'method' => 'PUT',
+            'route' => 'user-colors.update',
+            'id' => 1,
+            'data' => array_merge(updatedUserColorData, ['new' => []]),
+            'structure' => ['errors' => ['new']],
+            'fragment' => ['errors' => ['new' => ['The new field is required.']]],
+        ],
+    ]);
 });
