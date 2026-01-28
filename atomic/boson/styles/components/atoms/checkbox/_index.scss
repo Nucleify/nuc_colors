@@ -4,7 +4,7 @@
   .p-checkbox[ad-type='#{$type}'] {
     @include entity-with-suffix($type) using ($suffix) {
       @include entity-checkbox-styles(
-        var(--#{$type}-item-color#{$suffix}) !important
+        var(--#{$type}-item-focus-color#{$suffix}) !important
       );
     }
   }
