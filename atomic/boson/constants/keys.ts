@@ -6,10 +6,6 @@ export const colorKeys: string[] = [
   'file',
   'money',
   'user',
-  'card',
-  'feature',
-  'link',
   'question',
-  'task',
   'technology',
 ]
