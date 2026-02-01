@@ -8,7 +8,6 @@ $dock-items: (
   files: file,
   settings: main,
   structural: main,
-  tasks: task,
 );
 
 @each $item, $type in $dock-items {

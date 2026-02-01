@@ -1,5 +1,11 @@
 @mixin entity-checkbox-styles($box-shadow-color) {
-  &:hover {
+  &.p-invalid {
+    .p-checkbox-box {
+      border-color: $invalid-color !important;
+    }
+  }
+
+  &:not(.p-invalid):hover {
     .p-checkbox-box {
       border-color: $box-shadow-color;
     }
