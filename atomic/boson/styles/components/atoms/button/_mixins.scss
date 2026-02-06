@@ -46,6 +46,7 @@
     &:focus-visible {
       background-color: $selected-color;
       color: $item-color;
+      box-shadow: none !important;
     }
 
     &:hover {
