@@ -8,48 +8,50 @@ import {
 
 export function applyColorsWithSystemAndUser(): void {
   if (import.meta.client) {
-    const cssVars: string[] = []
+    requestAnimationFrame(() => {
+      const cssVars: string[] = []
 
-    colorKeys.forEach((item: string): void =>
-      colorShades.forEach((state: string): void => {
-        const baseKey = `${item}-item-${state}`
-        const systemKey = `${baseKey}-system`
-        const userKey = `${baseKey}-user`
-        const systemValue =
-          cookieGetItem(systemKey) ||
-          localStorageGetItem(systemKey) ||
-          defaultColors[baseKey] ||
-          ''
+      colorKeys.forEach((item: string): void =>
+        colorShades.forEach((state: string): void => {
+          const baseKey = `${item}-item-${state}`
+          const systemKey = `${baseKey}-system`
+          const userKey = `${baseKey}-user`
+          const systemValue =
+            cookieGetItem(systemKey) ||
+            localStorageGetItem(systemKey) ||
+            defaultColors[baseKey] ||
+            ''
 
-        if (systemValue) {
-          cssVars.push(`--${systemKey}: ${systemValue}`)
-          cssVars.push(`--${baseKey}: ${systemValue}`)
-        }
+          if (systemValue) {
+            cssVars.push(`--${systemKey}: ${systemValue}`)
+            cssVars.push(`--${baseKey}: ${systemValue}`)
+          }
 
-        const userValue =
-          cookieGetItem(userKey) ||
-          localStorageGetItem(userKey) ||
-          systemValue ||
-          ''
+          const userValue =
+            cookieGetItem(userKey) ||
+            localStorageGetItem(userKey) ||
+            systemValue ||
+            ''
 
-        if (userValue) {
-          cssVars.push(`--${userKey}: ${userValue}`)
-          cssVars.push(`--${baseKey}: ${userValue}`)
-        }
-      })
-    )
+          if (userValue) {
+            cssVars.push(`--${userKey}: ${userValue}`)
+            cssVars.push(`--${baseKey}: ${userValue}`)
+          }
+        })
+      )
 
-    const style = document.createElement('style')
+      const style = document.createElement('style')
 
-    style.id = 'nuc-color-vars'
-    style.textContent = `:root { ${cssVars.join('; ')} }`
+      style.id = 'nuc-color-vars'
+      style.textContent = `:root { ${cssVars.join('; ')} }`
 
-    const existingStyle = document.getElementById('nuc-color-vars')
+      const existingStyle = document.getElementById('nuc-color-vars')
 
-    if (existingStyle) {
-      existingStyle.remove()
-    }
-    document.head.appendChild(style)
+      if (existingStyle) {
+        existingStyle.remove()
+      }
+      document.head.appendChild(style)
+    })
   }
 }
 
