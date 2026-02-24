@@ -1,6 +1,6 @@
 import { defineNuxtPlugin, useHead, useRequestEvent } from 'nuxt/app'
 
-import { colorKeys, colorShades } from 'atomic'
+import { colorKeys, colorShades, defaultColors } from 'atomic'
 
 export default defineNuxtPlugin(() => {
   if (import.meta.server) {
@@ -17,9 +17,11 @@ export default defineNuxtPlugin(() => {
           const systemCookieMatch = cookies.match(
             new RegExp(`${systemKey}=([^;]+)`)
           )
+          const value = systemCookieMatch
+            ? decodeURIComponent(systemCookieMatch[1])
+            : defaultColors[baseKey] || ''
 
-          if (systemCookieMatch) {
-            const value = decodeURIComponent(systemCookieMatch[1])
+          if (value) {
             colorVariables.push(`--${systemKey}: ${value};`)
             colorVariables.push(`--${baseKey}: ${value};`)
           }
@@ -42,7 +44,7 @@ export default defineNuxtPlugin(() => {
             ? decodeURIComponent(userCookieMatch[1])
             : systemCookieMatch
               ? decodeURIComponent(systemCookieMatch[1])
-              : null
+              : defaultColors[baseKey] || ''
 
           if (userValue) {
             colorVariables.push(`--${userKey}: ${userValue};`)
@@ -51,15 +53,13 @@ export default defineNuxtPlugin(() => {
         })
       })
 
-      if (colorVariables.length > 0) {
-        useHead({
-          style: [
-            {
-              innerHTML: `:root { ${colorVariables.join(' ')} }`,
-            },
-          ],
-        })
-      }
+      useHead({
+        style: [
+          {
+            innerHTML: `:root { ${colorVariables.join(' ')} }`,
+          },
+        ],
+      })
     }
   }
 })

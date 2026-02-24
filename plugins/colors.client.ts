@@ -12,17 +12,7 @@ import {
 
 export default defineNuxtPlugin(() => {
   if (import.meta.client) {
-    if (document.readyState === 'loading') {
-      document.addEventListener(
-        'DOMContentLoaded',
-        applyColorsWithSystemAndUser,
-        {
-          once: true,
-        }
-      )
-    } else {
-      applyColorsWithSystemAndUser()
-    }
+    applyColorsWithSystemAndUser()
 
     colorKeys.forEach((item: string): void =>
       colorShades.forEach((state: string): void => {

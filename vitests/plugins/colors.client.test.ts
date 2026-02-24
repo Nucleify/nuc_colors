@@ -30,16 +30,9 @@ describe('colors.client plugin', (): void => {
   })
 
   it('calls applyColorsWithSystemAndUser and syncs localStorage/cookies', (): void => {
-    const addEventListenerSpy = vi.spyOn(document, 'addEventListener')
-
     colorsClientPlugin({} as NuxtApp)
 
-    expect(addEventListenerSpy).toHaveBeenCalledWith(
-      'DOMContentLoaded',
-      atomic.applyColorsWithSystemAndUser,
-      { once: true }
-    )
-    expect(atomic.applyColorsWithSystemAndUser).not.toHaveBeenCalled()
+    expect(atomic.applyColorsWithSystemAndUser).toHaveBeenCalled()
     expect(atomic.cookieSetItem).toHaveBeenCalledWith(
       'foo-item-bar-system',
       'localValue'
