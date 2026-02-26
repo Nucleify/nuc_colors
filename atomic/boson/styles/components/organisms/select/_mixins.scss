@@ -1,13 +1,26 @@
-@mixin entity-select-styles($item-color, $focus-color) {
-  &:hover {
-    border-color: $item-color;
+@mixin entity-select-styles($item-color, $box-shadow-color) {
+  &.p-invalid {
+    border-color: $invalid-color;
+
+    &:focus {
+      outline: 0 none;
+      outline-offset: 0;
+      box-shadow: 0 0 0.5em $invalid-color;
+      border-color: $invalid-color;
+    }
   }
 
-  &[data-p="focus"] {
-    outline: 0 none;
-    outline-offset: 0;
-    box-shadow: 0 0 0.5em $focus-color;
-    border-color: $item-color;
+  &:not(.p-invalid) {
+    &:hover {
+      border-color: $box-shadow-color;
+    }
+
+    &.p-focus {
+      outline: 0 none;
+      outline-offset: 0;
+      box-shadow: 0 0 0.5em $box-shadow-color;
+      border-color: $item-color;
+    }
   }
 }
 
