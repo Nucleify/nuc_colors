@@ -33,9 +33,6 @@ export function resetColorsToDefault(): void {
 
     applyColorsWithSystemAndUser()
 
-    const event = new Event('colorUpdated')
-    document.dispatchEvent(event)
-
     console.log('🎉 All colors reset to default values!')
   }
 }

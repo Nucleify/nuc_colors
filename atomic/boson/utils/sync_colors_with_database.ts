@@ -75,9 +75,6 @@ export async function syncColorsWithDatabase(): Promise<void> {
     if (updatedCount > 0) {
       console.log(`✅ Synced ${updatedCount} colors from database`)
       applyColorsWithSystemAndUser()
-
-      const event = new Event('colorUpdated')
-      document.dispatchEvent(event)
     } else {
       console.log('✅ Colors are already in sync')
     }
