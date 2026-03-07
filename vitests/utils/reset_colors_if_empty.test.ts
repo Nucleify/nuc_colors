@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import * as atomic from 'atomic'
-import { resetColorsIfEmpty } from 'atomic'
+import * as nucleify from 'nucleify'
+import { resetColorsIfEmpty } from 'nucleify'
 
 describe('resetColorsIfEmpty', (): void => {
   beforeEach((): void => {
@@ -14,13 +14,13 @@ describe('resetColorsIfEmpty', (): void => {
 
   it('should reset colors and set localStorage flag if not initialized', (): void => {
     const getItemSpy = vi
-      .spyOn(atomic, 'localStorageGetItem')
+      .spyOn(nucleify, 'localStorageGetItem')
       .mockReturnValue(null)
     const setItemSpy = vi
-      .spyOn(atomic, 'localStorageSetItem')
+      .spyOn(nucleify, 'localStorageSetItem')
       .mockImplementation()
     const resetSpy = vi
-      .spyOn(atomic, 'resetColorsToDefault')
+      .spyOn(nucleify, 'resetColorsToDefault')
       .mockImplementation()
 
     resetColorsIfEmpty()
@@ -31,12 +31,12 @@ describe('resetColorsIfEmpty', (): void => {
   })
 
   it('should not reset colors if already initialized', (): void => {
-    vi.spyOn(atomic, 'localStorageGetItem').mockReturnValue('true')
+    vi.spyOn(nucleify, 'localStorageGetItem').mockReturnValue('true')
     const setItemSpy = vi
-      .spyOn(atomic, 'localStorageSetItem')
+      .spyOn(nucleify, 'localStorageSetItem')
       .mockImplementation()
     const resetSpy = vi
-      .spyOn(atomic, 'resetColorsToDefault')
+      .spyOn(nucleify, 'resetColorsToDefault')
       .mockImplementation()
 
     resetColorsIfEmpty()

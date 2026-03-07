@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
-import * as atomic from 'atomic'
-import { setColorWithUserSuffix } from 'atomic'
+import * as nucleify from 'nucleify'
+import { setColorWithUserSuffix } from 'nucleify'
 
 describe('setColorWithUserSuffix', (): void => {
   it('should set cookie, localStorage, and CSS variable with user suffix', (): void => {
@@ -9,8 +9,8 @@ describe('setColorWithUserSuffix', (): void => {
     const value = '#ff0000'
     const userKey = `${key}-user`
 
-    atomic.cookieSetItem(userKey, '')
-    atomic.localStorageSetItem(userKey, '')
+    nucleify.cookieSetItem(userKey, '')
+    nucleify.localStorageSetItem(userKey, '')
     document.documentElement.style.removeProperty(`--${key}`)
 
     setColorWithUserSuffix(key, value)

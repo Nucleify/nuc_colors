@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import * as atomic from 'atomic'
-import { resetColorsToDefault } from 'atomic'
+import * as nucleify from 'nucleify'
+import { resetColorsToDefault } from 'nucleify'
 
 describe('resetColorsToDefault', (): void => {
   beforeEach((): void => {
@@ -17,10 +17,10 @@ describe('resetColorsToDefault', (): void => {
 
     const styleContent = styleElement?.textContent || ''
 
-    atomic.colorKeys.forEach((item) => {
-      atomic.colorShades.forEach((state) => {
+    nucleify.colorKeys.forEach((item) => {
+      nucleify.colorShades.forEach((state) => {
         const key = `${item}-item-${state}`
-        const defaultValue = atomic.defaultColors[key]
+        const defaultValue = nucleify.defaultColors[key]
 
         if (defaultValue) {
           expect(styleContent).toContain(`--${key}: ${defaultValue}`)
@@ -31,19 +31,19 @@ describe('resetColorsToDefault', (): void => {
 
   it('should call storage functions correctly', (): void => {
     const localStorageSetItemSpy = vi
-      .spyOn(atomic, 'localStorageSetItem')
+      .spyOn(nucleify, 'localStorageSetItem')
       .mockImplementation()
     const cookieSetItemSpy = vi
-      .spyOn(atomic, 'cookieSetItem')
+      .spyOn(nucleify, 'cookieSetItem')
       .mockImplementation()
 
     resetColorsToDefault()
 
-    const expectedCalls = atomic.colorKeys.reduce((acc, item) => {
+    const expectedCalls = nucleify.colorKeys.reduce((acc, item) => {
       return (
         acc +
-        atomic.colorShades.filter(
-          (state) => atomic.defaultColors[`${item}-item-${state}`]
+        nucleify.colorShades.filter(
+          (state) => nucleify.defaultColors[`${item}-item-${state}`]
         ).length
       )
     }, 0)

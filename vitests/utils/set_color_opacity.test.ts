@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { setColorOpacity } from 'atomic'
+import { setColorOpacity } from 'nucleify'
 
 describe('setColorOpacity', (): void => {
   it('should convert hex to rgba with given opacity', (): void => {

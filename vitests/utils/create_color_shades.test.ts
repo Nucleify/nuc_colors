@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import * as atomic from 'atomic'
-import { createColorShades } from 'atomic'
+import * as nucleify from 'nucleify'
+import { createColorShades } from 'nucleify'
 
 describe('createColorShades', (): void => {
   beforeEach((): void => {
@@ -9,10 +9,10 @@ describe('createColorShades', (): void => {
   })
 
   it('should return an object with all expected keys', (): void => {
-    vi.spyOn(atomic, 'darkenColor').mockImplementation(
+    vi.spyOn(nucleify, 'darkenColor').mockImplementation(
       (color, percent) => `darkened(${color},${percent})`
     )
-    vi.spyOn(atomic, 'setColorOpacity').mockImplementation(
+    vi.spyOn(nucleify, 'setColorOpacity').mockImplementation(
       (color, opacity) => `opacity(${color},${opacity})`
     )
 
@@ -31,10 +31,10 @@ describe('createColorShades', (): void => {
 
   it('should call darkenColor and setColorOpacity with correct arguments', (): void => {
     const darkenSpy = vi
-      .spyOn(atomic, 'darkenColor')
+      .spyOn(nucleify, 'darkenColor')
       .mockReturnValue('darkened')
     const opacitySpy = vi
-      .spyOn(atomic, 'setColorOpacity')
+      .spyOn(nucleify, 'setColorOpacity')
       .mockReturnValue('opacity')
 
     createColorShades('#00ff00')

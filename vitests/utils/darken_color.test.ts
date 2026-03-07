@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { darkenColor } from 'atomic'
+import { darkenColor } from 'nucleify'
 
 describe('darkenColor', () => {
   it('should darken a pure red color by 50%', (): void => {

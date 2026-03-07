@@ -8,7 +8,7 @@ import {
   cookieSetItem,
   localStorageGetItem,
   localStorageSetItem,
-} from 'atomic'
+} from 'nucleify'
 
 function syncStorageToCookies(): void {
   colorKeys.forEach((item: string): void =>

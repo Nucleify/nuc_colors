@@ -1,6 +1,6 @@
 import type { Ref } from 'vue'
 
-import type { ColorPickerInterface } from 'atomic'
+import type { ColorPickerInterface } from 'nucleify'
 
 export interface NucColorPickerInterface extends ColorPickerInterface {}
 

@@ -1,5 +1,4 @@
-import type { SettingsGroupInterface } from 'atomic'
-
+import type { SettingsGroupInterface } from 'nucleify'
 import { modulesGroups } from '../../../../nuc_settings/constants/modules'
 
 export function getColorGroups(): SettingsGroupInterface[] {

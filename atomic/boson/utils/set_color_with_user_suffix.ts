@@ -1,4 +1,4 @@
-import { cookieSetItem, localStorageSetItem } from 'atomic'
+import { cookieSetItem, localStorageSetItem } from 'nucleify'
 
 export function setColorWithUserSuffix(key: string, value: string): void {
   const userKey = `${key}-user`

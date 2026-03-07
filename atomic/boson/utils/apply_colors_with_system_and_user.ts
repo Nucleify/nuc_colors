@@ -4,7 +4,7 @@ import {
   cookieGetItem,
   defaultColors,
   localStorageGetItem,
-} from 'atomic'
+} from 'nucleify'
 
 export function applyColorsWithSystemAndUser(): void {
   if (import.meta.client) {

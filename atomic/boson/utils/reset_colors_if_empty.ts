@@ -2,7 +2,7 @@ import {
   localStorageGetItem,
   localStorageSetItem,
   resetColorsToDefault,
-} from 'atomic'
+} from 'nucleify'
 
 export function resetColorsIfEmpty(): void {
   if (import.meta.client) {

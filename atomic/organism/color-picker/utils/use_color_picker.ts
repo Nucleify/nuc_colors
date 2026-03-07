@@ -1,14 +1,14 @@
 import type { Ref } from 'vue'
 import { nextTick, onMounted, onUnmounted, ref } from 'vue'
 
-import type { UseColorPickerInterface, UseColorsInterface } from 'atomic'
+import type { UseColorPickerInterface, UseColorsInterface } from 'nucleify'
 import {
   applyColorsWithSystemAndUser,
   createColorShades,
   setColorWithUserSuffix,
   updateUserColorInDatabase,
   useColors,
-} from 'atomic'
+} from 'nucleify'
 
 export function useColorPicker(item: string): UseColorPickerInterface {
   const { colors }: UseColorsInterface = useColors()

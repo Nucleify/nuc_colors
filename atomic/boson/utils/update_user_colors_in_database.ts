@@ -1,4 +1,4 @@
-import type { ApiResponseType } from 'atomic'
+import type { ApiResponseType } from 'nucleify'
 import {
   apiRequest,
   colorKeys,
@@ -6,7 +6,7 @@ import {
   cookieGetItem,
   localStorageGetItem,
   sessionStorageGetItem,
-} from 'atomic'
+} from 'nucleify'
 
 interface ColorUpdatePayload {
   name: string

@@ -26,8 +26,8 @@
 <script setup lang="ts">
 import { watch } from 'vue'
 
-import type { NucColorPickerInterface } from 'atomic'
-import { useColorPicker } from 'atomic'
+import type { NucColorPickerInterface } from 'nucleify'
+import { useColorPicker } from 'nucleify'
 
 const props = defineProps<NucColorPickerInterface>()
 

@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { colorGroups, resetColorsToDefault } from 'atomic'
+import { colorGroups, resetColorsToDefault } from 'nucleify'
 
 const props = defineProps<{
   heading: string

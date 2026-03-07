@@ -1,6 +1,6 @@
 import { defineNuxtPlugin, useHead, useRequestEvent } from 'nuxt/app'
 
-import { colorKeys, colorShades, defaultColors } from 'atomic'
+import { colorKeys, colorShades, defaultColors } from 'nucleify'
 
 export default defineNuxtPlugin(() => {
   if (import.meta.server) {

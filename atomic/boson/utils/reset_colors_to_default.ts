@@ -7,7 +7,7 @@ import {
   defaultColors,
   localStorageGetItem,
   localStorageSetItem,
-} from 'atomic'
+} from 'nucleify'
 
 export function resetColorsToDefault(): void {
   if (import.meta.client) {

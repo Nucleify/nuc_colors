@@ -1,4 +1,4 @@
-import { cookieGetItem, defaultColors, localStorageGetItem } from 'atomic'
+import { cookieGetItem, defaultColors, localStorageGetItem } from 'nucleify'
 
 export function getColorValue(key: string): string {
   return (

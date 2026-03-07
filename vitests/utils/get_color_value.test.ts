@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import * as atomic from 'atomic'
-import { getColorValue } from 'atomic'
+import * as nucleify from 'nucleify'
+import { getColorValue } from 'nucleify'
 
 describe('getColorValue', () => {
   beforeEach(() => {
@@ -9,9 +9,9 @@ describe('getColorValue', () => {
   })
 
   it('should return value from cookie if available', () => {
-    vi.spyOn(atomic, 'cookieGetItem').mockReturnValue('#ff0000')
-    vi.spyOn(atomic, 'localStorageGetItem').mockReturnValue(null)
-    vi.spyOn(atomic, 'defaultColors', 'get').mockReturnValue({
+    vi.spyOn(nucleify, 'cookieGetItem').mockReturnValue('#ff0000')
+    vi.spyOn(nucleify, 'localStorageGetItem').mockReturnValue(null)
+    vi.spyOn(nucleify, 'defaultColors', 'get').mockReturnValue({
       test: '#000000',
     })
 
@@ -20,9 +20,9 @@ describe('getColorValue', () => {
   })
 
   it('should return value from localStorage if cookie is empty', () => {
-    vi.spyOn(atomic, 'cookieGetItem').mockReturnValue('')
-    vi.spyOn(atomic, 'localStorageGetItem').mockReturnValue('#00ff00')
-    vi.spyOn(atomic, 'defaultColors', 'get').mockReturnValue({
+    vi.spyOn(nucleify, 'cookieGetItem').mockReturnValue('')
+    vi.spyOn(nucleify, 'localStorageGetItem').mockReturnValue('#00ff00')
+    vi.spyOn(nucleify, 'defaultColors', 'get').mockReturnValue({
       test: '#000000',
     })
 
@@ -31,9 +31,9 @@ describe('getColorValue', () => {
   })
 
   it('should return value from defaultColors if both cookie and localStorage are empty', () => {
-    vi.spyOn(atomic, 'cookieGetItem').mockReturnValue('')
-    vi.spyOn(atomic, 'localStorageGetItem').mockReturnValue('')
-    vi.spyOn(atomic, 'defaultColors', 'get').mockReturnValue({
+    vi.spyOn(nucleify, 'cookieGetItem').mockReturnValue('')
+    vi.spyOn(nucleify, 'localStorageGetItem').mockReturnValue('')
+    vi.spyOn(nucleify, 'defaultColors', 'get').mockReturnValue({
       test: '#0000ff',
     })
 
@@ -42,9 +42,9 @@ describe('getColorValue', () => {
   })
 
   it('should return empty string if no value is found', () => {
-    vi.spyOn(atomic, 'cookieGetItem').mockReturnValue('')
-    vi.spyOn(atomic, 'localStorageGetItem').mockReturnValue('')
-    vi.spyOn(atomic, 'defaultColors', 'get').mockReturnValue({})
+    vi.spyOn(nucleify, 'cookieGetItem').mockReturnValue('')
+    vi.spyOn(nucleify, 'localStorageGetItem').mockReturnValue('')
+    vi.spyOn(nucleify, 'defaultColors', 'get').mockReturnValue({})
 
     const result = getColorValue('test')
     expect(result).toBe('')
