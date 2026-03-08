@@ -8,6 +8,7 @@ import {
   localStorageSetItem,
   sessionStorageGetItem,
 } from 'nucleify'
+
 import { applyColorsWithSystemAndUser } from './apply_colors_with_system_and_user'
 
 interface UserColorFromDatabase {
