@@ -8,6 +8,7 @@ $dock-items: (
   files: file,
   settings: main,
   structural: main,
+  translations: main,
 );
 
 @each $item, $type in $dock-items {
