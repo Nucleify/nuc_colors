@@ -13,9 +13,9 @@ import {
 function syncStorageToCookies(): void {
   colorKeys.forEach((item: string): void =>
     colorShades.forEach((state: string): void => {
-      const baseKey = `${item}-item-${state}`
-      const systemKey = `${baseKey}-system`
-      const userKey = `${baseKey}-user`
+      const baseKey = `${item}-${state}`
+      const systemKey = `${baseKey}-s`
+      const userKey = `${baseKey}-u`
 
       const systemLocalStorageValue = localStorageGetItem(systemKey)
       const systemCookieValue = cookieGetItem(systemKey)

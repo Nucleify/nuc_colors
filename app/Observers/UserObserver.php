@@ -20,7 +20,7 @@ class UserObserver
         $systemColors = SystemColor::all();
 
         foreach ($systemColors as $systemColor) {
-            $name = str_replace('-system', '-user', $systemColor->getName());
+            $name = str_replace('-s', '-u', $systemColor->getName());
 
             UserColor::create([
                 'user_id' => $user->getId(),

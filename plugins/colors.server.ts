@@ -12,8 +12,8 @@ export default defineNuxtPlugin(() => {
 
       colorKeys.forEach((item: string) => {
         colorShades.forEach((state: string) => {
-          const baseKey = `${item}-item-${state}`
-          const systemKey = `${baseKey}-system`
+          const baseKey = `${item}-${state}`
+          const systemKey = `${baseKey}-s`
           const systemCookieMatch = cookies.match(
             new RegExp(`${systemKey}=([^;]+)`)
           )
@@ -30,9 +30,9 @@ export default defineNuxtPlugin(() => {
 
       colorKeys.forEach((item: string) => {
         colorShades.forEach((state: string) => {
-          const baseKey = `${item}-item-${state}`
-          const systemKey = `${baseKey}-system`
-          const userKey = `${baseKey}-user`
+          const baseKey = `${item}-${state}`
+          const systemKey = `${baseKey}-s`
+          const userKey = `${baseKey}-u`
           const userCookieMatch = cookies.match(
             new RegExp(`${userKey}=([^;]+)`)
           )

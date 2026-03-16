@@ -19,7 +19,7 @@ describe('resetColorsToDefault', (): void => {
 
     nucleify.colorKeys.forEach((item) => {
       nucleify.colorShades.forEach((state) => {
-        const key = `${item}-item-${state}`
+        const key = `${item}-${state}`
         const defaultValue = nucleify.defaultColors[key]
 
         if (defaultValue) {
@@ -43,7 +43,7 @@ describe('resetColorsToDefault', (): void => {
       return (
         acc +
         nucleify.colorShades.filter(
-          (state) => nucleify.defaultColors[`${item}-item-${state}`]
+          (state) => nucleify.defaultColors[`${item}-${state}`]
         ).length
       )
     }, 0)

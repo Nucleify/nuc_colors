@@ -20,7 +20,7 @@ class SystemColorSeeder extends Seeder
             $name = $color['name'];
             $name = preg_replace('/-new$/', '', $name);
             $name = str_replace('', '', $name);
-            $name = $name . '-system';
+            $name = $name . '-s';
 
             SystemColor::factory()->create([
                 'name' => $name,

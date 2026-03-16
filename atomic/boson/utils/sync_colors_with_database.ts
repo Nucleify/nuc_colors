@@ -56,7 +56,7 @@ export async function syncColorsWithDatabase(): Promise<void> {
 
     colorKeys.forEach((item: string): void =>
       colorShades.forEach((state: string): void => {
-        const userKey = `${item}-item-${state}-user`
+        const userKey = `${item}-${state}-u`
         const dbColor = dbColorMap.get(userKey)
 
         if (!dbColor) return

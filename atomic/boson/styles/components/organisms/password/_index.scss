@@ -1,14 +1,8 @@
 @import 'mixins';
 
-@each $type in $ad-types {
-  .p-password[ad-type='#{$type}'] {
-    .p-inputtext {
-      @include entity-with-suffix($type) using ($suffix) {
-        @include entity-password-styles(
-          var(--#{$type}-item-color#{$suffix}) !important,
-          var(--#{$type}-item-focus-color#{$suffix}) !important
-        );
-      }
-    }
-  }
+.p-password[ad-type] .p-inputtext {
+  @include entity-password-styles(
+    var(--inp-item) !important,
+    var(--inp-focus) !important
+  );
 }

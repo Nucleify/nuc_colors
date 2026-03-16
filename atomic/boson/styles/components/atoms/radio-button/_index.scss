@@ -1,25 +1,22 @@
 @import 'mixins';
 
-@each $type in $ad-types {
-  .p-radiobutton[ad-type='#{$type}'] {
-    @include entity-with-suffix($type) using ($suffix) {
-      @include entity-radiobutton-styles(
-        var(--#{$type}-item-color#{$suffix}) !important
-      );
-    }
-  }
+.p-radiobutton[ad-type] {
+  @include entity-radiobutton-styles(var(--radio-item) !important);
+}
 
+// Dock radio: specyficzny selektor, zachowujemy entity-with-suffix
+@each $type in $ad-types {
   .p-dock
-  .p-dock-list-container
-  ul
-  .p-dock-item
-  .dock-position-buttons
-  div[ad-type='#{$type}']
-  input[type='radio'] {
+    .p-dock-list-container
+    ul
+    .p-dock-item
+    .dock-position-buttons
+    div[ad-type='#{$type}']
+    input[type='radio'] {
     @include entity-with-suffix($type) using ($suffix) {
       @include entity-dock-radiobutton-styles(
         #ffffff15,
-        var(--#{$type}-item-color#{$suffix}) !important
+        var(--#{$type}-c#{$suffix}) !important
       );
     }
   }

@@ -1,27 +1,13 @@
 @import 'mixins';
 
-@each $type in $ad-types {
-  .p-checkbox[ad-type='#{$type}'] {
-    @include entity-with-suffix($type) using ($suffix) {
-      @include entity-checkbox-styles(
-        var(--#{$type}-item-focus-color#{$suffix}) !important
-      );
-    }
-  }
+.p-checkbox[ad-type] {
+  @include entity-checkbox-styles(var(--chk-focus) !important);
+}
 
-  .p-checkbox-checked[ad-type='#{$type}'] {
-    @include entity-with-suffix($type) using ($suffix) {
-      @include entity-checkbox-checked-styles(
-        var(--#{$type}-item-color#{$suffix}) !important
-      );
-    }
-  }
+label:hover .p-checkbox[ad-type] .p-checkbox-box {
+  border-color: var(--chk-item) !important;
+}
 
-  label:hover {
-    .p-checkbox[ad-type='#{$type}'] .p-checkbox-box {
-      @include entity-with-suffix($type) using ($suffix) {
-        border-color: var(--#{$type}-item-color#{$suffix}) !important;
-      }
-    }
-  }
+.p-checkbox-checked[ad-type] {
+  @include entity-checkbox-checked-styles(var(--chk-item) !important);
 }

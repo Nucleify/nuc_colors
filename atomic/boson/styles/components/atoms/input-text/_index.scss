@@ -1,12 +1,8 @@
 @import 'mixins';
 
-@each $type in $ad-types {
-  .p-inputtext[ad-type='#{$type}'] {
-    @include entity-with-suffix($type) using ($suffix) {
-      @include entity-inputtext-styles(
-        var(--#{$type}-item-color#{$suffix}) !important,
-        var(--#{$type}-item-focus-color#{$suffix}) !important
-      );
-    }
-  }
+.p-inputtext[ad-type] {
+  @include entity-inputtext-styles(
+    var(--inp-item) !important,
+    var(--inp-focus) !important
+  );
 }

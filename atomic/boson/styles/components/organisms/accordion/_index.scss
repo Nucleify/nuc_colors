@@ -1,13 +1,9 @@
 @import 'mixins';
 
-@each $type in $ad-types {
-  .p-accordion[ad-type='#{$type}'] {
-    @include entity-with-suffix($type) using ($suffix) {
-      @include entity-accordion-styles(
-        var(--#{$type}-item-color#{$suffix}) !important,
-        var(--#{$type}-item-focus-color#{$suffix}) !important,
-        var(--#{$type}-item-highlight-color#{$suffix}) !important
-      );
-    }
-  }
+.p-accordion[ad-type] {
+  @include entity-accordion-styles(
+    var(--acc-item) !important,
+    var(--acc-focus) !important,
+    var(--acc-highlight) !important
+  );
 }

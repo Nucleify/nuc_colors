@@ -17,16 +17,16 @@ describe('useColors', (): void => {
       expect(itemColors).toHaveProperty('secondary')
 
       expect(itemColors.primary).toBe(
-        nucleify.getColorValue(`${key}-item-color-user`) ||
-          nucleify.getColorValue(`${key}-item-color-system`)
+        nucleify.getColorValue(`${key}-c-u`) ||
+          nucleify.getColorValue(`${key}-c-s`)
       )
       expect(itemColors.hover).toBe(
-        nucleify.getColorValue(`${key}-item-hover-color-user`) ||
-          nucleify.getColorValue(`${key}-item-hover-color-system`)
+        nucleify.getColorValue(`${key}-hv-u`) ||
+          nucleify.getColorValue(`${key}-hv-s`)
       )
       expect(itemColors.secondary).toBe(
-        nucleify.getColorValue(`${key}-item-secondary-color-user`) ||
-          nucleify.getColorValue(`${key}-item-secondary-color-system`)
+        nucleify.getColorValue(`${key}-sc-u`) ||
+          nucleify.getColorValue(`${key}-sc-s`)
       )
     })
   })

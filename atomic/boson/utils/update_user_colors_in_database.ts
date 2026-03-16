@@ -103,7 +103,7 @@ export async function updateAllUserColorsInDatabase(): Promise<void> {
 
     colorKeys.forEach((item: string): void =>
       colorShades.forEach((state: string): void => {
-        const userKey = `${item}-item-${state}-user`
+        const userKey = `${item}-${state}-u`
         const value = cookieGetItem(userKey) || localStorageGetItem(userKey)
 
         if (value) {

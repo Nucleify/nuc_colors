@@ -19,7 +19,7 @@ export function useColorPicker(item: string): UseColorPickerInterface {
     if (!import.meta.client) return
 
     nextTick(() => {
-      const userKey = `--${item}-item-color-user`
+      const userKey = `--${item}-c-u`
 
       const computedStyle = getComputedStyle(document.documentElement)
       const newColor =
@@ -42,11 +42,21 @@ export function useColorPicker(item: string): UseColorPickerInterface {
 
     const updatePromises: Promise<void>[] = []
 
+    const shadeMap: Record<string, string> = {
+      '': 'c',
+      dark: 'd',
+      hover: 'hv',
+      focus: 'f',
+      highlight: 'h',
+      secondary: 'sc',
+      selected: 'sl',
+    }
     Object.entries(colorSettings).forEach(([key, value]) => {
-      const colorKey = `${item}-item${key ? `-${key}` : ''}-color`
+      const shade = shadeMap[key] ?? 'c'
+      const colorKey = `${item}-${shade}`
       setColorWithUserSuffix(colorKey, value)
 
-      const userKey = `${colorKey}-user`
+      const userKey = `${colorKey}-u`
       updatePromises.push(updateUserColorInDatabase(userKey, value))
     })
 

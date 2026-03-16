@@ -5,9 +5,9 @@ import { setColorWithUserSuffix } from 'nucleify'
 
 describe('setColorWithUserSuffix', (): void => {
   it('should set cookie, localStorage, and CSS variable with user suffix', (): void => {
-    const key = 'task-item-color'
+    const key = 'task-c'
     const value = '#ff0000'
-    const userKey = `${key}-user`
+    const userKey = `${key}-u`
 
     nucleify.cookieSetItem(userKey, '')
     nucleify.localStorageSetItem(userKey, '')
