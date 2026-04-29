@@ -45,7 +45,7 @@ async function flushPendingUpdates(): Promise<void> {
 
   try {
     const rawResponse = await apiRequest<BulkUpdateResponse>(
-      apiUrl() + '/user-colors/all',
+      apiUrl() + '/user-colors',
       'PUT',
       { colors }
     )
@@ -118,7 +118,7 @@ export async function updateAllUserColorsInDatabase(): Promise<void> {
     }
 
     const rawResponse = await apiRequest<BulkUpdateResponse>(
-      apiUrl() + '/user-colors/all',
+      apiUrl() + '/user-colors',
       'PUT',
       { colors }
     )
