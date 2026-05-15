@@ -1,3 +1,14 @@
+-- Same as migrations/20260501000001 — seed-only runs stay compatible with legacy tables.
+alter table public.user_colors add column if not exists user_id uuid references auth.users (id) on delete cascade;
+alter table public.user_colors add column if not exists name text;
+alter table public.user_colors add column if not exists value text;
+alter table public.user_colors add column if not exists new boolean not null default false;
+alter table public.user_colors add column if not exists is_new boolean not null default false;
+alter table public.user_colors add column if not exists created_at timestamptz not null default now();
+alter table public.user_colors add column if not exists updated_at timestamptz not null default now();
+
+create unique index if not exists user_colors_user_id_name_uidx on public.user_colors (user_id, name);
+
 with prepared_colors(name, value) as (
   values
     ('activity-c', '#ffb600'),
@@ -63,10 +74,4 @@ on conflict (name) do update set
   value = excluded.value,
   updated_at = now();
 
-insert into public.user_colors (user_id, name, value, is_new)
-select p.id, 'color-seed-1-u', '#102030', false
-from public.user_profiles p
-on conflict (user_id, name) do update set
-  value = excluded.value,
-  is_new = excluded.is_new,
-  updated_at = now();
+-- Per-user entity colors are seeded in 20260502000000_user_colors_entities_seed.sql (runs after auth.users).

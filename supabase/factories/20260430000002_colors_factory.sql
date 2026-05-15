@@ -1,3 +1,5 @@
+drop function if exists public.factory_system_color(integer);
+
 create or replace function public.factory_system_color(i integer)
 returns table(name text, value text)
 language sql
