@@ -34,12 +34,15 @@ export async function syncColorsWithDatabase(): Promise<void> {
   try {
     console.log('🔄 Syncing colors with database...')
 
-    const response = await apiRequest<UserColorFromDatabase[]>(
+    const response = await apiRequest<{ data?: UserColorFromDatabase[] }>(
       apiUrl() + '/user-colors',
       'GET'
     )
 
-    const dbColors = Array.isArray(response) ? response : []
+    const dbColors =
+      response && typeof response === 'object' && 'data' in response
+        ? (response as { data?: UserColorFromDatabase[] }).data || []
+        : []
 
     if (dbColors.length === 0) {
       console.log('📭 No colors found in database')
