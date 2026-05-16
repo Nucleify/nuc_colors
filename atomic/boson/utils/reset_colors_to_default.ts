@@ -9,30 +9,33 @@ import {
   localStorageSetItem,
 } from 'nucleify'
 
-export function resetColorsToDefault(): void {
-  if (import.meta.client) {
-    console.log('🔄 Resetting all colors to default values...')
-    colorKeys.forEach((item: string): void =>
-      colorShades.forEach((state: string): void => {
-        const key = `${item}-${state}`
-        const systemKey = `${key}-s`
-        const userKey = `${key}-u`
-        const systemValue =
-          cookieGetItem(systemKey) ||
-          localStorageGetItem(systemKey) ||
-          defaultColors[key]
+import {
+  clearUserColorsCache,
+  updateAllUserColorsInDatabase,
+} from './update_user_colors_in_database'
 
-        if (systemValue) {
-          cookieSetItem(userKey, systemValue)
-          localStorageSetItem(userKey, systemValue)
+export async function resetColorsToDefault(): Promise<void> {
+  if (!import.meta.client) return
 
-          console.log(`✅ Reset: ${userKey} = ${systemValue}`)
-        }
-      })
-    )
+  colorKeys.forEach((item: string): void =>
+    colorShades.forEach((state: string): void => {
+      const key = `${item}-${state}`
+      const systemKey = `${key}-s`
+      const userKey = `${key}-u`
+      const systemValue =
+        cookieGetItem(systemKey) ||
+        localStorageGetItem(systemKey) ||
+        defaultColors[key]
 
-    applyColorsWithSystemAndUser()
+      if (systemValue) {
+        cookieSetItem(userKey, systemValue)
+        localStorageSetItem(userKey, systemValue)
+      }
+    })
+  )
 
-    console.log('🎉 All colors reset to default values!')
-  }
+  applyColorsWithSystemAndUser()
+
+  clearUserColorsCache()
+  await updateAllUserColorsInDatabase()
 }
