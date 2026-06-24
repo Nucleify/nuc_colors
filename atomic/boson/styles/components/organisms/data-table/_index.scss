@@ -1,9 +1,0 @@
-@import 'mixins';
-
-.p-datatable[ad-type] {
-  @include entity-datatable-styles(
-    var(--hl-item) !important,
-    var(--hl-selected) !important,
-    var(--hl-highlight) !important
-  );
-}

@@ -1,50 +1,65 @@
-import { defineNuxtPlugin } from 'nuxt/app'
-
 import {
   applyColorsWithSystemAndUser,
   colorKeys,
   colorShades,
-  cookieGetItem,
-  cookieSetItem,
-  localStorageGetItem,
-  localStorageSetItem,
+  colorStorageGet,
+  colorStorageSet,
+  ensureFrameworkColorStorage,
 } from 'nucleify'
 
-function syncStorageToCookies(): void {
-  colorKeys.forEach((item: string): void =>
-    colorShades.forEach((state: string): void => {
+export function colorsClientPlugin(): void {
+  if (typeof document === 'undefined') return
+
+  ensureFrameworkColorStorage()
+
+  if (document.readyState === 'loading') {
+    document.addEventListener(
+      'DOMContentLoaded',
+      applyColorsWithSystemAndUser,
+      {
+        once: true,
+      }
+    )
+  } else {
+    applyColorsWithSystemAndUser()
+  }
+
+  colorKeys.forEach((item: string) =>
+    colorShades.forEach((state: string) => {
       const baseKey = `${item}-${state}`
       const systemKey = `${baseKey}-s`
       const userKey = `${baseKey}-u`
 
-      const systemLocalStorageValue = localStorageGetItem(systemKey)
-      const systemCookieValue = cookieGetItem(systemKey)
-      if (systemLocalStorageValue && !systemCookieValue) {
-        cookieSetItem(systemKey, systemLocalStorageValue)
+      const systemLocalStorageValue = colorStorageGet(systemKey)
+      if (systemLocalStorageValue) {
+        colorStorageSet(systemKey, systemLocalStorageValue)
       }
 
-      const userLocalStorageValue = localStorageGetItem(userKey)
-      const userCookieValue = cookieGetItem(userKey)
-
-      if (userLocalStorageValue && !userCookieValue) {
-        cookieSetItem(userKey, userLocalStorageValue)
-      } else if (!userLocalStorageValue && !userCookieValue) {
-        const systemValue = systemLocalStorageValue || systemCookieValue
+      const userLocalStorageValue = colorStorageGet(userKey)
+      if (userLocalStorageValue) {
+        colorStorageSet(userKey, userLocalStorageValue)
+      } else if (!colorStorageGet(userKey)) {
+        const systemValue = colorStorageGet(systemKey)
         if (systemValue) {
-          cookieSetItem(userKey, systemValue)
-          localStorageSetItem(userKey, systemValue)
+          colorStorageSet(userKey, systemValue)
         }
       }
+
+      document.addEventListener(`colorUpdated:${systemKey}`, () => {
+        const value = colorStorageGet(systemKey)
+        if (value) {
+          colorStorageSet(systemKey, value)
+        }
+        applyColorsWithSystemAndUser()
+      })
+
+      document.addEventListener(`colorUpdated:${userKey}`, () => {
+        const value = colorStorageGet(userKey)
+        if (value) {
+          colorStorageSet(userKey, value)
+        }
+        applyColorsWithSystemAndUser()
+      })
     })
   )
 }
-
-export default defineNuxtPlugin(() => {
-  if (import.meta.client) {
-    applyColorsWithSystemAndUser()
-
-    requestIdleCallback(() => {
-      syncStorageToCookies()
-    })
-  }
-})

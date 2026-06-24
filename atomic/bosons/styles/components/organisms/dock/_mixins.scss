@@ -1,0 +1,8 @@
+@mixin entity-dock-item-styles($item-color) {
+  color: $item-color;
+  text-decoration: none !important;
+  border: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  transition: color 0.2s ease;
+}

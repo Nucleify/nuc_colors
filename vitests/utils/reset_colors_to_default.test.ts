@@ -1,27 +1,23 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-const updateAllUserColorsInDatabase = vi.fn().mockResolvedValue(undefined)
-const clearUserColorsCache = vi.fn()
-
-vi.mock('../../atomic/boson/utils/update_user_colors_in_database', () => ({
-  updateAllUserColorsInDatabase: (...args: unknown[]) =>
-    updateAllUserColorsInDatabase(...args),
-  clearUserColorsCache: (...args: unknown[]) => clearUserColorsCache(...args),
-}))
-
 import * as nucleify from 'nucleify'
 import { resetColorsToDefault } from 'nucleify'
 
 describe('resetColorsToDefault', (): void => {
   beforeEach((): void => {
     vi.clearAllMocks()
-    updateAllUserColorsInDatabase.mockResolvedValue(undefined)
+    vi.spyOn(nucleify, 'clearUserColorsCache').mockImplementation()
+    vi.spyOn(nucleify, 'updateAllUserColorsInDatabase').mockResolvedValue(
+      undefined
+    )
   })
 
   it('should reset all colors to default values', async (): Promise<void> => {
     await resetColorsToDefault()
 
-    const styleElement = document.getElementById('nuc-color-vars')
+    const styleElement = document.getElementById(
+      `nuc-color-vars-${nucleify.getColorFramework()}`
+    )
     expect(styleElement).toBeTruthy()
     expect(styleElement?.tagName).toBe('STYLE')
 
@@ -42,8 +38,8 @@ describe('resetColorsToDefault', (): void => {
   it('should persist reset colors to the database', async (): Promise<void> => {
     await resetColorsToDefault()
 
-    expect(clearUserColorsCache).toHaveBeenCalledTimes(1)
-    expect(updateAllUserColorsInDatabase).toHaveBeenCalledTimes(1)
+    expect(nucleify.clearUserColorsCache).toHaveBeenCalledTimes(1)
+    expect(nucleify.updateAllUserColorsInDatabase).toHaveBeenCalledTimes(1)
   })
 
   it('should call storage functions correctly', async (): Promise<void> => {

@@ -13,6 +13,7 @@ describe('resetColorsIfEmpty', (): void => {
   })
 
   it('should reset colors and set localStorage flag if not initialized', (): void => {
+    const initializedKey = nucleify.colorStorageGetInitializedKey()
     const getItemSpy = vi
       .spyOn(nucleify, 'localStorageGetItem')
       .mockReturnValue(null)
@@ -25,8 +26,8 @@ describe('resetColorsIfEmpty', (): void => {
 
     resetColorsIfEmpty()
 
-    expect(getItemSpy).toHaveBeenCalledWith('colors-initialized')
-    expect(setItemSpy).toHaveBeenCalledWith('colors-initialized', 'true')
+    expect(getItemSpy).toHaveBeenCalledWith(initializedKey)
+    expect(setItemSpy).toHaveBeenCalledWith(initializedKey, 'true')
     expect(resetSpy).toHaveBeenCalled()
   })
 
