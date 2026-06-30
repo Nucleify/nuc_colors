@@ -4,6 +4,7 @@
     '.p-textarea',
     '.p-colorpicker',
     '.p-datepicker',
+    '.p-calendar',
     '.p-password',
     '.p-select'
   ),
@@ -21,6 +22,15 @@
     '--hl-item': 'c',
     '--hl-selected': 'sl',
     '--hl-highlight': 'h'
+  )
+);
+@include entity-var-overrides-multi(
+  ('.p-datepicker-panel'),
+  (
+    '--ddp-item': 'c',
+    '--ddp-focus': 'f',
+    '--ddp-selected': 'sl',
+    '--ddp-highlight': 'h'
   )
 );
 @include entity-var-overrides(

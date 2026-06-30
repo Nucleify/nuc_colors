@@ -1,10 +1,20 @@
 @use 'sass:list';
 @import 'mixins';
 
-.p-datepicker[ad-type] {
+.p-datepicker[ad-type],
+.p-calendar[ad-type] {
   @include entity-calendar-styles(
     var(--inp-item) !important,
     var(--inp-focus) !important
+  );
+}
+
+.p-datepicker-panel[ad-type] {
+  @include entity-datepicker-styles(
+    var(--ddp-item) !important,
+    var(--ddp-focus) !important,
+    var(--ddp-selected) !important,
+    var(--ddp-highlight) !important
   );
 }
 

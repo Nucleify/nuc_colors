@@ -31,4 +31,26 @@ $dock-items: (
       }
     }
   }
+
+  .nuc-sidebar-link[ad-type='#{$item}']:hover,
+  .nuc-sidebar-link[data-ad-type='#{$item}']:hover {
+    @include entity-sidebar-link-hover($type);
+  }
+
+  .nuc-sidebar-item.is-active .nuc-sidebar-link[ad-type='#{$item}'],
+  .nuc-sidebar-item.is-active .nuc-sidebar-link[data-ad-type='#{$item}'] {
+    @include entity-sidebar-link-active($type);
+  }
+}
+
+@each $type in $ad-types {
+  .nuc-sidebar-link[ad-type='#{$type}']:hover,
+  .nuc-sidebar-link[data-ad-type='#{$type}']:hover {
+    @include entity-sidebar-link-hover($type);
+  }
+
+  .nuc-sidebar-item.is-active .nuc-sidebar-link[ad-type='#{$type}'],
+  .nuc-sidebar-item.is-active .nuc-sidebar-link[data-ad-type='#{$type}'] {
+    @include entity-sidebar-link-active($type);
+  }
 }

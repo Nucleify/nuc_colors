@@ -43,11 +43,16 @@
     }
   }
 
-  .p-datepicker-today {
-    span {
-      color: $item-color;
-      background: $highlight-color;
-    }
+  .p-datepicker-day-cell.p-datepicker-today
+    .p-datepicker-day:not(.p-datepicker-day-selected) {
+    color: $item-color;
+    background: $highlight-color;
+  }
+
+  .p-datepicker-day-selected,
+  span.p-highlight[data-p-highlight='true'] {
+    color: $primary-white-text-color;
+    background: $item-color;
   }
 
   .p-button {
