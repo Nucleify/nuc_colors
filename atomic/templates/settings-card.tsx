@@ -31,7 +31,7 @@ export function NucColorSettingsCard({
             {group.items?.map((item) => (
               <li key={item} className="settings-card-item">
                 <AdLabel label={item} forInput={item} />
-                <NucColorPicker adType={item.toLowerCase() as AdTypeType} />
+                <NucColorPicker nuiType={item.toLowerCase() as NuiTypeType} />
               </li>
             ))}
           </ul>

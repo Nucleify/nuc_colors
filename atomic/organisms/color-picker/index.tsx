@@ -8,7 +8,7 @@ import { AdColorPicker, useColorPicker } from 'nucleify'
 
 export function NucColorPicker(props: NucColorPickerInterface): JSX.Element {
   const { itemColor, onItemColorChange, setColorValues } = useColorPicker(
-    props.adType!
+    props.nuiType!
   )
 
   useEffect(() => {

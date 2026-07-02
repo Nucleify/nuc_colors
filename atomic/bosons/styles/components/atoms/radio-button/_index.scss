@@ -1,14 +1,14 @@
 @import 'mixins';
 
-.p-radiobutton[ad-type] {
+.p-radiobutton[nui-type] {
   @include entity-radiobutton-styles(var(--radio-item) !important);
 }
 
 // Dock radio: specyficzny selektor, zachowujemy entity-with-suffix
-@each $type in $ad-types {
+@each $type in $nui-types {
   .nuc-dock
     .dock-position-buttons
-    div[ad-type='#{$type}']
+    div[nui-type='#{$type}']
     input[type='radio'] {
     @include entity-with-suffix($type) using ($suffix) {
       @include entity-dock-radiobutton-styles(

@@ -1,6 +1,6 @@
 @import 'mixins';
 
-.p-textarea[ad-type] {
+.p-textarea[nui-type] {
   @include entity-textarea-styles(
     var(--inp-item) !important,
     var(--inp-focus) !important

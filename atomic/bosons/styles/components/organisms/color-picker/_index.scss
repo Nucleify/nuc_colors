@@ -1,6 +1,6 @@
 @import 'mixins';
 
-.p-colorpicker[ad-type] {
+.p-colorpicker[nui-type] {
   @include entity-colorpicker-styles(
     var(--inp-item) !important,
     var(--inp-focus) !important

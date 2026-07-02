@@ -1,7 +1,7 @@
 <template>
   <ad-color-picker
     v-model="itemColor"
-    :ad-type="props.adType"
+    :nui-type="props.nuiType"
     :default-color="props.defaultColor"
     :default-value="props.defaultValue"
     :name="props.name"
@@ -31,7 +31,7 @@ import { useColorPicker } from 'nucleify'
 
 const props = defineProps<NucColorPickerInterface>()
 
-const { itemColor, setColorValues } = useColorPicker(props.adType!)
+const { itemColor, setColorValues } = useColorPicker(props.nuiType!)
 
 watch(itemColor, () => {
   setColorValues()

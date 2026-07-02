@@ -11,7 +11,7 @@ $entity-suffixes: (
 );
 $entity-vars: ();
 
-@each $entity in $ad-types {
+@each $entity in $nui-types {
   $entity-map: ();
 
   @each $prop-name, $suffix in $entity-suffixes {

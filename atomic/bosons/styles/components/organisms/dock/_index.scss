@@ -18,11 +18,11 @@ $dock-items: (
     .p-dock,
     .nuc-dock,
     .ad-dock {
-      .iconify[ad-type='#{$item}'],
-      .iconify[data-ad-type='#{$item}'],
-      [data-ad-type='#{$item}'] .iconify,
-      .pi[ad-type='#{$item}'],
-      .pi[data-ad-type='#{$item}'] {
+      .iconify[nui-type='#{$item}'],
+      .iconify[data-nui-type='#{$item}'],
+      [data-nui-type='#{$item}'] .iconify,
+      .pi[nui-type='#{$item}'],
+      .pi[data-nui-type='#{$item}'] {
         @include entity-with-suffix($type) using ($suffix) {
           @include entity-dock-item-styles(
             var(--#{$type}-c#{$suffix}) !important
@@ -32,25 +32,25 @@ $dock-items: (
     }
   }
 
-  .nuc-sidebar-link[ad-type='#{$item}']:hover,
-  .nuc-sidebar-link[data-ad-type='#{$item}']:hover {
+  .nuc-sidebar-link[nui-type='#{$item}']:hover,
+  .nuc-sidebar-link[data-nui-type='#{$item}']:hover {
     @include entity-sidebar-link-hover($type);
   }
 
-  .nuc-sidebar-item.is-active .nuc-sidebar-link[ad-type='#{$item}'],
-  .nuc-sidebar-item.is-active .nuc-sidebar-link[data-ad-type='#{$item}'] {
+  .nuc-sidebar-item.is-active .nuc-sidebar-link[nui-type='#{$item}'],
+  .nuc-sidebar-item.is-active .nuc-sidebar-link[data-nui-type='#{$item}'] {
     @include entity-sidebar-link-active($type);
   }
 }
 
-@each $type in $ad-types {
-  .nuc-sidebar-link[ad-type='#{$type}']:hover,
-  .nuc-sidebar-link[data-ad-type='#{$type}']:hover {
+@each $type in $nui-types {
+  .nuc-sidebar-link[nui-type='#{$type}']:hover,
+  .nuc-sidebar-link[data-nui-type='#{$type}']:hover {
     @include entity-sidebar-link-hover($type);
   }
 
-  .nuc-sidebar-item.is-active .nuc-sidebar-link[ad-type='#{$type}'],
-  .nuc-sidebar-item.is-active .nuc-sidebar-link[data-ad-type='#{$type}'] {
+  .nuc-sidebar-item.is-active .nuc-sidebar-link[nui-type='#{$type}'],
+  .nuc-sidebar-item.is-active .nuc-sidebar-link[data-nui-type='#{$type}'] {
     @include entity-sidebar-link-active($type);
   }
 }

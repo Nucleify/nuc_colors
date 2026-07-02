@@ -14,7 +14,7 @@
       <ul class="settings-card-item-list">
         <li v-for="item in group.items" :key="item" class="settings-card-item">
           <ad-label :label="item" :for="item" />
-          <nuc-color-picker :ad-type="item.toLowerCase()" />
+          <nuc-color-picker :nui-type="item.toLowerCase()" />
         </li>
       </ul>
     </div>

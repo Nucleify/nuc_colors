@@ -1,6 +1,6 @@
 @import 'mixins';
 
-.ad-logo[ad-type] {
+.ad-logo[nui-type] {
   @include entity-logo-styles(
     var(--logo-item) !important,
     var(--logo-dark) !important

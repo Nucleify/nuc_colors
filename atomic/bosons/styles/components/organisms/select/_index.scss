@@ -1,13 +1,13 @@
 @import 'mixins';
 
-.p-select[ad-type] {
+.p-select[nui-type] {
   @include entity-select-styles(
     var(--inp-item) !important,
     var(--inp-focus) !important
   );
 }
 
-.p-select-overlay[ad-type] {
+.p-select-overlay[nui-type] {
   @include entity-select-overlay-styles(
     var(--hl-item) !important,
     var(--hl-selected) !important,

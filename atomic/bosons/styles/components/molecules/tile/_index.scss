@@ -1,6 +1,6 @@
 @import 'mixins';
 
-.ad-tile[ad-type] {
+.ad-tile[nui-type] {
   @include entity-tile-styles(
     var(--tile-item) !important,
     var(--tile-highlight) !important

@@ -1,6 +1,6 @@
 @import 'mixins';
 
-.p-selectbutton[ad-type] {
+.p-selectbutton[nui-type] {
   @include entity-select-button-styles(
     var(--selbtn-selected) !important
   );

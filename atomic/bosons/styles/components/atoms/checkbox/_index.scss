@@ -17,15 +17,15 @@
   }
 }
 
-.p-checkbox[ad-type] {
+.p-checkbox[nui-type] {
   @include entity-checkbox-styles(var(--chk-focus) !important);
 }
 
-label:hover .p-checkbox[ad-type] .p-checkbox-box {
+label:hover .p-checkbox[nui-type] .p-checkbox-box {
   border-color: var(--chk-item) !important;
 }
 
-.p-checkbox-checked[ad-type],
-.p-checkbox[ad-type].p-highlight {
+.p-checkbox-checked[nui-type],
+.p-checkbox[nui-type].p-highlight {
   @include entity-checkbox-checked-styles(var(--chk-item) !important);
 }

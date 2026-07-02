@@ -9,13 +9,13 @@
 }
 
 @mixin entity-var-overrides($selector, $var-spec) {
-  @each $type in $ad-types {
-    #{$selector}[ad-type='#{$type}'] {
+  @each $type in $nui-types {
+    #{$selector}[nui-type='#{$type}'] {
       @each $local, $entity-suffix in $var-spec {
         #{$local}: var(--#{$type}-#{$entity-suffix}-u);
       }
     }
-    .nuc-system #{$selector}[ad-type='#{$type}'] {
+    .nuc-system #{$selector}[nui-type='#{$type}'] {
       @each $local, $entity-suffix in $var-spec {
         #{$local}: var(--#{$type}-#{$entity-suffix}-s);
       }
@@ -24,11 +24,11 @@
 }
 
 @mixin entity-var-overrides-multi($selectors, $var-spec) {
-  @each $type in $ad-types {
+  @each $type in $nui-types {
     $sel-list: ();
 
     @each $sel in $selectors {
-      $full-sel: $sel + '[ad-type=\'' + $type + '\']';
+      $full-sel: $sel + '[nui-type=\'' + $type + '\']';
       $sel-list: list.append($sel-list, $full-sel, comma);
     }
     #{$sel-list} {
@@ -40,7 +40,7 @@
     $sel-list-sys: ();
 
     @each $sel in $selectors {
-      $full-sel-sys: '.nuc-system ' + $sel + '[ad-type=\'' + $type + '\']';
+      $full-sel-sys: '.nuc-system ' + $sel + '[nui-type=\'' + $type + '\']';
       $sel-list-sys: list.append($sel-list-sys, $full-sel-sys, comma);
     }
     #{$sel-list-sys} {
@@ -52,7 +52,7 @@
 }
 
 @mixin entity-class-var-overrides($base-selector, $var-spec) {
-  @each $type in $ad-types {
+  @each $type in $nui-types {
     #{$base-selector}.#{$type} {
       @each $local, $entity-suffix in $var-spec {
         #{$local}: var(--#{$type}-#{$entity-suffix}-u);
