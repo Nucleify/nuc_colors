@@ -8,6 +8,7 @@ $bg-green-color-05: var(--nuc-bg-green-color-05);
 $p-card-background: var(--nuc-p-card-background);
 $p-card-border: var(--nuc-p-card-border);
 $p-card-box-shadow: var(--nuc-p-card-box-shadow);
+$input-border: var(--nuc-input-border, var(--nuc-p-card-border));
 $content-background: var(--nuc-content-background);
 
 // Invalid/Error colors

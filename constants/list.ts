@@ -1,7 +1,8 @@
+import type { SettingsGroupInterface } from 'nucleify'
+
 import { colorKeys } from './keys'
 
-import { modulesGroups } from '../../../../nuc_settings/constants/modules'
-import type { SettingsGroupInterface } from '../../../../nuc_settings/types/interfaces'
+import { modulesGroups } from '../../nuc_settings/constants/modules'
 
 function capitalize(value: string): string {
   if (!value) return value
