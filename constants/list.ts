@@ -1,8 +1,9 @@
-import type { SettingsGroupInterface } from 'nucleify'
-
 import { colorKeys } from './keys'
 
-import { modulesGroups } from '../../nuc_settings/constants/modules'
+export interface SettingsGroupInterface {
+  name?: string
+  items?: string[]
+}
 
 function capitalize(value: string): string {
   if (!value) return value
@@ -11,21 +12,7 @@ function capitalize(value: string): string {
 
 const colorKeySet = new Set(colorKeys)
 
-function toColorItem(item: string): string | null {
-  const key = item.toLowerCase()
-  return colorKeySet.has(key) ? capitalize(key) : null
-}
-
 export function getColorGroups(): SettingsGroupInterface[] {
-  const moduleGroups = modulesGroups(true)
-    .map((group) => ({
-      name: group.name,
-      items: (group.items ?? [])
-        .map(toColorItem)
-        .filter((item): item is string => item !== null),
-    }))
-    .filter((group) => (group.items?.length ?? 0) > 0)
-
   const groups: SettingsGroupInterface[] = [
     {
       name: 'main',
@@ -35,12 +22,20 @@ export function getColorGroups(): SettingsGroupInterface[] {
 
   if (colorKeySet.has('user')) {
     groups.push({
-      name: 'nuc_admin',
+      name: 'nuc_users',
       items: ['User'],
     })
   }
 
-  return [...groups, ...moduleGroups]
+  for (const key of colorKeys) {
+    if (key === 'main' || key === 'user') continue
+    groups.push({
+      name: key,
+      items: [capitalize(key)],
+    })
+  }
+
+  return groups
 }
 
 export function getColorList(): string[] {

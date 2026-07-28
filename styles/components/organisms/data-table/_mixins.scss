@@ -1,5 +1,5 @@
 @mixin entity-datatable-styles($item-color, $selected-color, $highlight-color) {
-  // PrimeVue 4: .p-datatable-column-sorted | PrimeReact 10: .p-sortable-column.p-highlight
+  // Sorted column: .p-datatable-column-sorted | .p-sortable-column.p-highlight
   .p-datatable-column-sorted,
   .p-sortable-column.p-datatable-column-sorted,
   .p-datatable-header-cell.p-datatable-column-sorted,

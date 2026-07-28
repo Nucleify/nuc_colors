@@ -102,6 +102,12 @@
   --nuc-white-text-rgb: 245, 244, 244;
 }
 
+.nuc-nuxt,
+.nuc-next {
+  --nuc-font-ui: 'Instrument Sans', system-ui, sans-serif;
+  --nuc-font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
 .nuc-nuxt {
   @include nuc-primary-palette-nuxt;
   @include nuc-theme-light-nuxt;
